@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fhir" nsURI="http://hl7.org/fhir" nsPrefix="fhir">
+  <eClassifiers xsi:type="ecore:EClass" name="MolecularSequence" eSuperTypes="fhir.ecore#//DomainResource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" upperBound="-1"
+        eType="ecore:EClass fhir.ecore#//Identifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//MolecularSequenceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coordinateSystem" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patient" eType="ecore:EClass fhir.ecore#//Patient"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specimen" eType="ecore:EClass fhir.ecore#//Specimen"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="device" eType="ecore:EClass fhir.ecore#//Device"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="organization" eType="ecore:EClass fhir.ecore#//Organization"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="quantity" eType="ecore:EClass fhir.ecore#//Quantity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceSeq" eType="#//ReferenceSeq"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceSeq" eSuperTypes="fhir.ecore#//BackboneElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chromosome" eType="ecore:EClass fhir.ecore#//CodeableConcept"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="genomeBuild" eType="ecore:EClass fhir.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" eType="ecore:EEnum fhir.ecore#//OrientationTypeList"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceSeqPointer" eType="ecore:EClass fhir.ecore#//MolecularSequence"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MolecularSequenceType" eSuperTypes="fhir.ecore#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//MolecularSequenceUseList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MolecularSequenceUseList">
+    <eLiterals name="aa"/>
+    <eLiterals name="dna" value="1"/>
+    <eLiterals name="rna" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

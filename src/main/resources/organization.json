@@ -1,0 +1,40 @@
+{
+	"resourceType": "Organization",
+	"id": "e44f438a-601b-30fb-85eb-bfaf8ddcb5ad",
+	"identifier": [
+		{
+			"system": "https://github.com/synthetichealth/synthea",
+			"value": "e44f438a-601b-30fb-85eb-bfaf8ddcb5ad"
+		}
+	],
+	"type": [
+		{
+			"coding": [
+				{
+					"system": "http://hl7.org/fhir/organization-type",
+					"code": "prov",
+					"display": "Healthcare Provider"
+				}
+			],
+			"text": "Healthcare Provider"
+		}
+	],
+	"name": "HEYWOOD HOSPITAL -",
+	"telecom": [
+		{
+			"system": "phone",
+			"value": "9786323420"
+		}
+	],
+	"address": [
+		{
+			"line": [
+				"242 GREEN STREET"
+			],
+			"city": "GARDNER",
+			"state": "MA",
+			"postalCode": "01440",
+			"country": "US"
+		}
+	]
+}
