@@ -2,10 +2,12 @@ package org.hl7.fhir.emf;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.emf.ecore.EObject;
@@ -29,15 +31,37 @@ class FHIRSDSTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FHIRSDSTest.class);
 
-	@BeforeAll
+//	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		URL patientURL = FHIRSDSTest.class.getClassLoader().getResource("patient.xml");
+		EObject eObject = FHIRSDS.load(patientURL);
+		assertNotNull(eObject);
+		FHIRSDS.save(eObject, "data/patient.json");
 	}
 
 //	@Test
-	void testLoad() {
+	void testLoadXML() {
 		URL patientURL = getClass().getClassLoader().getResource("patient.xml");
 		EObject eObject = FHIRSDS.load(patientURL);
 		assertNotNull(eObject);
+		FHIRSDS.save(eObject, "data/patient.json");
+	}
+
+	@Test
+	void testLoadJSONPat() {
+		InputStream reader = null;
+		try {
+			reader = new FileInputStream("data/patient.json");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		EObject eObject = FHIRSDS.loadFromJSON(reader, "data/patient.json", Bundle.class);
+		assertNotNull(eObject);
+		Patient pat = (Patient) eObject;
+		assertNotNull(pat);
+		for (EObject eO : pat.getIdentifier()) {
+			LOG.info(eO.eClass().getName());
+		}
 	}
 
 	@Test
@@ -74,21 +98,6 @@ class FHIRSDSTest {
 	}
 
 //	@Test
-	void testLoadJSONPat() {
-		URL bundleURL = getClass().getClassLoader().getResource("patient.json");
-		InputStream reader = null;
-		try {
-			reader = bundleURL.openStream();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		EObject eObject = FHIRSDS.loadFromJSON(reader, "data/patient.json", Patient.class);
-		assertNotNull(eObject);
-		Patient bundle = (Patient) eObject;
-		assertNotNull(bundle);
-	}
-	
-//	@Test
 	void testLoadXMLDR() {
 		URL bundleURL = getClass().getClassLoader().getResource("diagnostic-report-genomics.xml");
 		InputStream reader = null;
@@ -102,8 +111,8 @@ class FHIRSDSTest {
 		Bundle bundle = (Bundle) eObject;
 		assertNotNull(bundle);
 	}
-	
-	//	@Test
+
+	// @Test
 	void testSave() {
 		URL patientURL = getClass().getClassLoader().getResource("patient.xml");
 		EObject eObject = FHIRSDS.load(patientURL);
@@ -119,7 +128,7 @@ class FHIRSDSTest {
 		OutputStream os = FHIRSDS.saveAsJSON(bundle, "data/bundle.json");
 		assertNotNull(os);
 	}
-	
+
 	Bundle createBundle() {
 		Bundle bundle = FhirFactory.eINSTANCE.createBundle();
 		BundleType bundleType = FhirFactory.eINSTANCE.createBundleType();
@@ -139,7 +148,7 @@ class FHIRSDSTest {
 		bundleEntry1.setFullUrl(uri1);
 		bundleEntry1.setId("111");
 		patient.setId(id1);
-		
+
 		BundleEntry bundleEntry2 = FhirFactory.eINSTANCE.createBundleEntry();
 		bundle.getEntry().add(bundleEntry2);
 		ResourceContainer resourceContainer2 = FhirFactory.eINSTANCE.createResourceContainer();
@@ -153,7 +162,7 @@ class FHIRSDSTest {
 		bundleEntry2.setFullUrl(uri2);
 		bundleEntry2.setId("222");
 		practitioner.setId(id2);
-		
+
 //		BundleEntry bundleEntry3 = FhirFactory.eINSTANCE.createBundleEntry();
 //		bundle.getEntry().add(bundleEntry3);
 //		ResourceContainer resourceContainer3 = FhirFactory.eINSTANCE.createResourceContainer();

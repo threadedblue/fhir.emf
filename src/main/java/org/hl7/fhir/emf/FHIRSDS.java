@@ -7,8 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -28,7 +31,6 @@ import org.emfjson.jackson.resource.JsonResource;
 import org.emfjson.jackson.resource.JsonResourceFactory;
 import org.emfjson.jackson.utils.ValueReader;
 import org.emfjson.jackson.utils.ValueWriter;
-import org.hl7.fhir.Bundle;
 import org.hl7.fhir.BundleType;
 import org.hl7.fhir.FhirPackage;
 import org.hl7.fhir.String;
@@ -43,11 +45,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 public class FHIRSDS implements Runnable {
@@ -56,46 +58,49 @@ public class FHIRSDS implements Runnable {
 
 	private static ResourceSet resourceSet = new ResourceSetImpl();
 	private static Resource resource;
-	private static EMFModule module = new EMFModule();
-	private static ObjectMapper mapper = new ObjectMapper();
-
+	private static FHIREMFModule module = new FHIREMFModule();
+	private static ObjectMapper mapper = new ObjectMapper(); 
 	static {
-		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		mapper.disable(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS);
-		mapper.disable(DeserializationFeature.WRAP_EXCEPTIONS);
-		mapper.disable(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE);
+		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH));
+		mapper.setTimeZone(TimeZone.getDefault());
+		LOG.debug("mapper set==>");
 		resourceSet.getPackageRegistry().put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		resourceSet.getPackageRegistry().put(FhirPackage.eNS_URI, FhirPackage.eINSTANCE);
 		resourceSet.getPackageRegistry().put(XhtmlPackage.eNS_URI, XhtmlPackage.eINSTANCE);
 		resourceSet.getPackageRegistry().put(NamespacePackage.eNS_URI, NamespacePackage.eINSTANCE);
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMLResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(mapper));
+//		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+//		mapper.disable(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS);
+//		mapper.disable(DeserializationFeature.WRAP_EXCEPTIONS);
+//		mapper.disable(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE);
 
-		module.setTypeInfo(new EcoreTypeInfo("type", new ValueReader<java.lang.String, EClass>() {
+		module.setTypeInfo(new EcoreTypeInfo("resourceType", new ValueReader<java.lang.String, EClass>() {
 			@Override
 			public EClass readValue(java.lang.String value, DeserializationContext context) {
+				LOG.debug("Called type deser==>");
 				return (EClass) FhirPackage.eINSTANCE.getEClassifier(value);
 			}
 		}, new ValueWriter<EClass, java.lang.String>() {
 			@Override
 			public java.lang.String writeValue(EClass value, SerializerProvider context) {
+				LOG.debug("Called type ser==>");
 				return value.getName();
 			}
 		}));
 
-		mapper.registerModule(module);
-		JsonResourceFactory factory = new JsonResourceFactory(mapper);
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", factory);
-
 		module.setReferenceSerializer(new JsonSerializer<EObject>() {
 			@Override
 			public void serialize(EObject v, JsonGenerator g, SerializerProvider s) throws IOException {
-				LOG.debug(((JsonResource) v.eResource()).getID(v));
+				LOG.debug("Called ref ser==>");
 				g.writeString(((JsonResource) v.eResource()).getID(v));
 			}
 		});
 		module.setReferenceDeserializer(new JsonDeserializer<ReferenceEntry>() {
 			@Override
 			public ReferenceEntry deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException {
+				LOG.debug("Called ref deser==>");
 				final EObject parent = EMFContext.getParent(ctxt);
 				final EReference reference = EMFContext.getReference(ctxt);
 
@@ -106,14 +111,12 @@ public class FHIRSDS implements Runnable {
 				return new ReferenceEntry.Base(parent, reference, parser.getText());
 			}
 		});
-		JsonNode data = mapper.createObjectNode()
-				.put("_id", 1)
-				.put("userId", "u1");
-		
+		module.addSerializer(org.hl7.fhir.Uri.class, new FHIREMFUriSerializer());
 		module.addDeserializer(org.hl7.fhir.Resource.class, new ResourceDeserializer());
-		module.addDeserializer(Bundle.class, new FHIREMFBundleDeserializer());
+		module.addDeserializer(org.hl7.fhir.Uri.class, new FHIREMFUriDeserializer());
 		module.addDeserializer(ResourceContainerImpl.class, new FHIREMFResourceContainerDeserializer(ResourceContainerImpl.class));
 		module.addDeserializer(BundleType.class, new FHIREMFBundleTypeDeserializer());
+		mapper.registerModule(module);
 	}
 
 	public static EObject load(URL url) {
@@ -158,10 +161,12 @@ public class FHIRSDS implements Runnable {
 		resource = resourceSet.createResource(uri);
 		EObject eObject = null;
 		try {
+			JsonNode data = mapper.readTree(reader);
 			eObject = (EObject) mapper.reader()
-					.withAttribute(EMFContext.Attributes.RESOURCE, resource)
+					.withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
+					.withAttribute(EMFContext.Attributes.RESOURCE_URI, uri)
 					.forType(clazz)
-					.readValue(reader);
+					.readValue(data);
 		} catch (IOException e) {
 			LOG.error("" , e);
 		}

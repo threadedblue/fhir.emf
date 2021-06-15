@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.hl7.fhir.FhirFactory;
 import org.hl7.fhir.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,6 +16,8 @@ import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import com.fasterxml.jackson.databind.node.IntNode;
 
 public class ResourceDeserializer extends StdDeserializer<Resource> {
+
+	private static final Logger LOG = LoggerFactory.getLogger(ResourceDeserializer.class);
 
 	private static final long serialVersionUID = -8784891711775214918L;
 
@@ -27,6 +31,7 @@ public class ResourceDeserializer extends StdDeserializer<Resource> {
 
 	@Override
 	public Resource deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+		LOG.debug("Called deser==>");
 		JsonNode node = jp.getCodec().readTree(jp);
 		int id = (Integer) ((IntNode) node.get("id")).numberValue();
 		String itemName = node.get("itemName").asText();
