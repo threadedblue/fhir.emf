@@ -34,6 +34,7 @@ import org.emfjson.jackson.utils.ValueWriter;
 import org.hl7.fhir.BundleType;
 import org.hl7.fhir.FhirPackage;
 import org.hl7.fhir.String;
+import org.hl7.fhir.Uri;
 import org.hl7.fhir.impl.ResourceContainerImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,9 +112,10 @@ public class FHIRSDS implements Runnable {
 				return new ReferenceEntry.Base(parent, reference, parser.getText());
 			}
 		});
-		module.addSerializer(org.hl7.fhir.Uri.class, new FHIREMFUriSerializer());
+		module.addSerializer(Uri.class, new FHIREMFPrimativeSerializer<Uri>());
+		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>());
+
 		module.addDeserializer(org.hl7.fhir.Resource.class, new ResourceDeserializer());
-		module.addDeserializer(org.hl7.fhir.Uri.class, new FHIREMFUriDeserializer());
 		module.addDeserializer(ResourceContainerImpl.class, new FHIREMFResourceContainerDeserializer(ResourceContainerImpl.class));
 		module.addDeserializer(BundleType.class, new FHIREMFBundleTypeDeserializer());
 		mapper.registerModule(module);

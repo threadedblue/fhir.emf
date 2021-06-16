@@ -10,23 +10,25 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
-public class FHIREMFUriSerializer extends StdSerializer<Uri> {
+public class FHIREMFPrimativeSerializer<T> extends StdSerializer<T> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(FHIREMFUriSerializer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FHIREMFPrimativeSerializer.class);
 
 	private static final long serialVersionUID = -8784891711775214918L;
 
-	public FHIREMFUriSerializer() {
+	public FHIREMFPrimativeSerializer() {
 		this(null);
 	}
 
-	public FHIREMFUriSerializer(Class<Uri> t) {
-		super(t);
+	public FHIREMFPrimativeSerializer(Class<T> clazz) {
+		super(clazz);
 	}
 
 	@Override
-	public void serialize(Uri value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+	public void serialize(T value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
-		gen.writeString(value.getValue());
-		gen.writeEndObject();	}
+//		gen.writeString(value.getValue());
+		gen.writeEndObject();
+	}
+
 }
