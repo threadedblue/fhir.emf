@@ -84,10 +84,6 @@ public class FHIRSDS implements Runnable {
 		Registrar.registerPackage(NamespacePackage.eNS_URI, NamespacePackage.eINSTANCE);
 		Registrar.associateExtension("xml", new XMLResourceFactoryImpl());
 		Registrar.associateExtension("json", new JsonResourceFactory(mapper));
-//		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-//		mapper.disable(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS);
-//		mapper.disable(DeserializationFeature.WRAP_EXCEPTIONS);
-//		mapper.disable(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE);
 
 		module.setTypeInfo(new EcoreTypeInfo("resourceType", new ValueReader<java.lang.String, EClass>() {
 			@Override
@@ -125,61 +121,61 @@ public class FHIRSDS implements Runnable {
 			}
 		});
 		module.addSerializer(Base64Binary.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(Boolean.class, new FHIREMFPrimativeDeserializer<Boolean>(Boolean.class));
+		module.addDeserializer(Base64Binary.class, new FHIREMFPrimativeDeserializer<Base64Binary>());
 
 		module.addSerializer(Boolean.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Boolean.class, new FHIREMFPrimativeDeserializer<Boolean>(Boolean.class));
+		module.addDeserializer(Boolean.class, new FHIREMFPrimativeDeserializer<Boolean>());
 
 		module.addSerializer(ContactPointSystem.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(ContactPointSystem.class, new FHIREMFPrimativeDeserializer<ContactPointSystem>());
 
 		module.addSerializer(ContactPointUse.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(ContactPointUse.class, new FHIREMFPrimativeDeserializer<ContactPointUse>());
 
 		module.addSerializer(Date.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Date.class, new FHIREMFPrimativeDeserializer<Date>(Date.class));
+		module.addDeserializer(Date.class, new FHIREMFPrimativeDeserializer<Date>());
 
 		module.addSerializer(DateTime.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>());
 
 		module.addSerializer(Decimal.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Decimal.class, new FHIREMFPrimativeDeserializer<Decimal>(Decimal.class));
+		module.addDeserializer(Decimal.class, new FHIREMFPrimativeDeserializer<Decimal>());
 
 		module.addSerializer(IdentifierUse.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(IdentifierUse.class, new FHIREMFPrimativeDeserializer<IdentifierUse>());
 
 		module.addSerializer(Integer.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(Integer.class, new FHIREMFPrimativeDeserializer<Integer>());
 
 		module.addSerializer(Markdown.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(Markdown.class, new FHIREMFPrimativeDeserializer<Markdown>());
 
 		module.addSerializer(NameUse.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(NameUse.class, new FHIREMFPrimativeDeserializer<NameUse>());
 
 		module.addSerializer(Oid.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(Oid.class, new FHIREMFPrimativeDeserializer<Oid>());
 
 		module.addSerializer(PositiveInt.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+		module.addDeserializer(PositiveInt.class, new FHIREMFPrimativeDeserializer<PositiveInt>());
 
 		module.addSerializer(String.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(String.class, new FHIREMFPrimativeDeserializer<String>(String.class));
+		module.addDeserializer(String.class, new FHIREMFPrimativeDeserializer<String>());
 
 		module.addSerializer(Time.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Time.class, new FHIREMFPrimativeDeserializer<Time>(Time.class));
+		module.addDeserializer(Time.class, new FHIREMFPrimativeDeserializer<Time>());
 
 		module.addSerializer(UnsignedInt.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>(Uri.class));
+		module.addDeserializer(UnsignedInt.class, new FHIREMFPrimativeDeserializer<UnsignedInt>());
 
 		module.addSerializer(Uri.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>(Uri.class));
+		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>());
 
 		module.addSerializer(Url.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>(Uri.class));
+		module.addDeserializer(Url.class, new FHIREMFPrimativeDeserializer<Url>());
 
 		module.addSerializer(Uuid.class, new FHIREMFPrimativeSerializer());
-//		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>(Uri.class));
+		module.addDeserializer(Uuid.class, new FHIREMFPrimativeDeserializer<Uuid>());
 
 		mapper.registerModule(module);
 	}

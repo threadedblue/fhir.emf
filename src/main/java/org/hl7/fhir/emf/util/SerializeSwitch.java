@@ -28,15 +28,14 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
-public class FHIREMFSwitch extends FhirSwitch<JsonGenerator> {
+public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(FHIREMFSwitch.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SerializeSwitch.class);
 
 	JsonGenerator gen;
 
-	public FHIREMFSwitch() {
+	public SerializeSwitch() {
 		super();
-		this.gen = gen;
 	}
 
 	@Override

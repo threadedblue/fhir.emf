@@ -12,7 +12,7 @@ import org.hl7.fhir.Integer;
 import org.hl7.fhir.String;
 import org.hl7.fhir.Time;
 import org.hl7.fhir.Uri;
-import org.hl7.fhir.emf.util.FHIREMFSwitch;
+import org.hl7.fhir.emf.util.SerializeSwitch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +28,7 @@ public class FHIREMFPrimativeSerializer extends StdSerializer<EObject> {
 
 	public java.lang.String marker = "<+init=>";
 	
-	private FHIREMFSwitch sSwitch = new FHIREMFSwitch();
+	private SerializeSwitch sSwitch = new SerializeSwitch();
 	
 	public FHIREMFPrimativeSerializer() {
 		this(null);
