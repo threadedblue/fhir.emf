@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.MapLikeType;
 
+@Deprecated
 public class FHIREMFDeserializers extends EMFDeserializers {
 
 	public FHIREMFDeserializers(EMFModule module) {

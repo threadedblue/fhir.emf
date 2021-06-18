@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import com.fasterxml.jackson.databind.node.IntNode;
 
+@Deprecated
 public class ResourceDeserializer extends StdDeserializer<Resource> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ResourceDeserializer.class);

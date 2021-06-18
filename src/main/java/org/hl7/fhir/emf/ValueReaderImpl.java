@@ -7,6 +7,7 @@ import org.hl7.fhir.String;
 
 import com.fasterxml.jackson.databind.DeserializationContext;
 
+@Deprecated
 public class ValueReaderImpl implements ValueReader<java.lang.String, EClass> {
 	@Override
 	public EClass readValue(java.lang.String value, DeserializationContext context) {

@@ -14,6 +14,7 @@ import org.emfjson.jackson.databind.deser.EDataTypeDeserializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 
+@Deprecated
 public class FHIREMFDatatypeDeserializer extends EDataTypeDeserializer {
 
 	@Override

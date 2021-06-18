@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 
+@Deprecated
 public class FHIREMFBundleTypeDeserializer extends StdDeserializer<BundleType> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FHIREMFBundleTypeDeserializer.class);

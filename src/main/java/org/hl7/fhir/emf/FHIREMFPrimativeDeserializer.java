@@ -1,8 +1,6 @@
 package org.hl7.fhir.emf;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -26,7 +24,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 
 public class FHIREMFPrimativeDeserializer<T> extends StdDeserializer<T> {
 
@@ -34,45 +31,21 @@ public class FHIREMFPrimativeDeserializer<T> extends StdDeserializer<T> {
 
 	private static final long serialVersionUID = -8784891711775214918L;
 
-	public static final java.lang.String PACKAGE_NAME = "org.hl7.fhir";
-
 	public final PRIMATIVE INSTANCE;
-
-	public enum PRIMATIVE {
-		BASE64(Base64Binary.class), BOOLEAN(Boolean.class), DATE(Date.class), DATETIME(DateTime.class),
-		DECIMAL(Decimal.class), INTEGER(Integer.class), STRING(String.class), TIME(Time.class), URI(Uri.class);
-
-		public final Class<?> clazz;
-		private static final Map<java.lang.String, PRIMATIVE> BY_LABEL = new HashMap<>();
-
-		static {
-			for (PRIMATIVE primative : values()) {
-				BY_LABEL.put(primative.name(), primative);
-			}
-		}
-
-		private PRIMATIVE(Class<?> clazz) {
-			this.clazz = clazz;
-		}
-
-		public static PRIMATIVE valueOfLabel(java.lang.String label) {
-			return BY_LABEL.get(label);
-		}
-	}
-
+	
 	public FHIREMFPrimativeDeserializer() {
 		this(null);
 	}
 
 	public FHIREMFPrimativeDeserializer(Class<T> clazz) {
 		super(clazz);
-		this.INSTANCE = PRIMATIVE.valueOfLabel(clazz.getSimpleName());
+		INSTANCE = PRIMATIVE.BY_LABEL.get(clazz.getSimpleName());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		LOG.debug("Called deser==>");
+		LOG.debug("Called deser==>" + INSTANCE.name());
 		JsonNode node = jp.getCodec().readTree(jp);
 		switch (INSTANCE) {
 		case BASE64:
@@ -82,6 +55,7 @@ public class FHIREMFPrimativeDeserializer<T> extends StdDeserializer<T> {
 		case BOOLEAN:
 			Boolean b = FhirFactory.eINSTANCE.createBoolean();
 			b.setValue(node.asBoolean());
+			LOG.trace("switch BOOLEAN==>" + node);
 			return (T) b;
 		case DATE:
 			Date date = FhirFactory.eINSTANCE.createDate();
@@ -92,26 +66,33 @@ public class FHIREMFPrimativeDeserializer<T> extends StdDeserializer<T> {
 				LOG.error("", e);
 				e.printStackTrace();
 			}
+			LOG.trace("switch DATE==>" + node);
 			date.setValue(xmlGC1);
 			return (T) date;
 		case DATETIME:
+			LOG.trace("1=>");
 			DateTime dt = FhirFactory.eINSTANCE.createDateTime();
+			LOG.trace("2=>" + node.toPrettyString());
 			XMLGregorianCalendar xmlGC2 = null;
 			try {
-				xmlGC2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(node.asText());
+				xmlGC2 = DatatypeFactory.newInstance().newXMLGregorianCalendar("2001-01-01T00:00:00");
+				LOG.trace("3=>");
 			} catch (DatatypeConfigurationException e) {
 				LOG.error("", e);
 				e.printStackTrace();
 			}
+			LOG.trace("switch DATETIME==>" + node);
 			dt.setValue(xmlGC2);
 			return (T) dt;
 		case DECIMAL:
 			Decimal decimal = FhirFactory.eINSTANCE.createDecimal();
 			decimal.setValue(node.asDouble());
+			LOG.trace("switch DECIMAL==>" + node);
 			return (T) decimal;
 		case INTEGER:
 			Integer integer = FhirFactory.eINSTANCE.createInteger();
 			integer.setValue(node.asInt());
+			LOG.trace("switch INTEGER==>" + node);
 			return (T) integer;
 		case TIME:
 			Time t = FhirFactory.eINSTANCE.createTime();
@@ -122,25 +103,21 @@ public class FHIREMFPrimativeDeserializer<T> extends StdDeserializer<T> {
 				LOG.error("", e);
 				e.printStackTrace();
 			}
+			LOG.trace("switch TIME==>" + node);
 			t.setValue(xmlGC3);
 			return (T) t;
 		case URI:
 			Uri uri = FhirFactory.eINSTANCE.createUri();
 			uri.setValue(node.asText());
+			LOG.trace("switch URI==>" + node);
 			return (T) uri;
 		case STRING:
+			LOG.trace("switch STRING==>" + node);
 		default:
 			String s = FhirFactory.eINSTANCE.createString();
-			s.setValue(node.asText(PACKAGE_NAME));
+			s.setValue(node.asText(node.asText()));
+			LOG.trace("switch default==>" + node);
 			return (T) s;
 		}
 	}
-
-	@Override
-	public Object deserializeWithType(JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer)
-			throws IOException {
-		LOG.debug("Called deserType==>");
-		return super.deserializeWithType(p, ctxt, typeDeserializer);
-	}
-
 }

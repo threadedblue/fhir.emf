@@ -31,12 +31,12 @@ class FHIRSDSTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FHIRSDSTest.class);
 
-//	@BeforeAll
+	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		URL patientURL = FHIRSDSTest.class.getClassLoader().getResource("patient.xml");
 		EObject eObject = FHIRSDS.load(patientURL);
 		assertNotNull(eObject);
-		FHIRSDS.save(eObject, "data/patient.json");
+		FHIRSDS.saveAsJSON(eObject, "data/patient.json");
 	}
 
 //	@Test
@@ -49,13 +49,7 @@ class FHIRSDSTest {
 
 	@Test
 	void testLoadJSONPat() {
-		InputStream reader = null;
-		try {
-			reader = new FileInputStream("data/patient.json");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		EObject eObject = FHIRSDS.loadFromJSON(reader, "data/patient.json", Bundle.class);
+		EObject eObject = FHIRSDS.loadFromJSON("data/patient.json", Patient.class);
 		assertNotNull(eObject);
 		Patient pat = (Patient) eObject;
 		assertNotNull(pat);
@@ -64,16 +58,9 @@ class FHIRSDSTest {
 		}
 	}
 
-	@Test
+//	@Test
 	void testLoadJSONBundle() {
-//		URL bundleURL = getClass().getClassLoader().getResource("Alicia.json");
-		InputStream reader = null;
-		try {
-			reader = new FileInputStream("data/Alicia.json");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		EObject eObject = FHIRSDS.loadFromJSON(reader, "data/Alicia.json", Bundle.class);
+		EObject eObject = FHIRSDS.loadFromJSON("data/Alicia.json", Bundle.class);
 		assertNotNull(eObject);
 		Bundle bundle = (Bundle) eObject;
 		assertNotNull(bundle);
@@ -84,14 +71,7 @@ class FHIRSDSTest {
 
 //	@Test
 	void testLoadJSONOrg() {
-		URL bundleURL = getClass().getClassLoader().getResource("organization.json");
-		InputStream reader = null;
-		try {
-			reader = bundleURL.openStream();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		EObject eObject = FHIRSDS.loadFromJSON(reader, "data/organization.json", Organization.class);
+		EObject eObject = FHIRSDS.loadFromJSON("data/organization.json", Organization.class);
 		assertNotNull(eObject);
 		Organization bundle = (Organization) eObject;
 		assertNotNull(bundle);

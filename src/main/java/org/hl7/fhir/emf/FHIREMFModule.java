@@ -8,7 +8,6 @@ public class FHIREMFModule extends EMFModule {
 
 	@Override
 	public void setupModule(SetupContext context) {
-		// TODO Auto-generated method stub
 		super.setupModule(context);
 	}
 

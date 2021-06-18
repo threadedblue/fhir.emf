@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import com.fasterxml.jackson.databind.node.IntNode;
 
+@Deprecated
 public class FHIREMFBundleDeserializer extends StdDeserializer<Patient> {
 
 	private static final long serialVersionUID = -8784891711775214918L;

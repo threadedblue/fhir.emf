@@ -2,6 +2,7 @@ package org.hl7.fhir.emf;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,24 +19,27 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
 import org.emfjson.jackson.databind.deser.ReferenceEntry;
-import org.emfjson.jackson.module.EMFModule;
 import org.emfjson.jackson.resource.JsonResource;
 import org.emfjson.jackson.resource.JsonResourceFactory;
 import org.emfjson.jackson.utils.ValueReader;
 import org.emfjson.jackson.utils.ValueWriter;
-import org.hl7.fhir.BundleType;
 import org.hl7.fhir.FhirPackage;
+import org.hl7.fhir.Base64Binary;
+import org.hl7.fhir.Boolean;
+import org.hl7.fhir.Date;
+import org.hl7.fhir.DateTime;
+import org.hl7.fhir.Decimal;
+import org.hl7.fhir.FhirFactory;
+import org.hl7.fhir.Integer;
 import org.hl7.fhir.String;
+import org.hl7.fhir.Time;
 import org.hl7.fhir.Uri;
-import org.hl7.fhir.impl.ResourceContainerImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3._1999.xhtml.XhtmlPackage;
@@ -57,21 +61,20 @@ public class FHIRSDS implements Runnable {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FHIRSDS.class);
 
-	private static ResourceSet resourceSet = new ResourceSetImpl();
+	private static ResourceSet resourceSet = Registrar.getResourceSet();
 	private static Resource resource;
 	private static FHIREMFModule module = new FHIREMFModule();
-	private static ObjectMapper mapper = new ObjectMapper(); 
+	private static ObjectMapper mapper = new ObjectMapper();
 	static {
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH));
 		mapper.setTimeZone(TimeZone.getDefault());
 		LOG.debug("mapper set==>");
-		resourceSet.getPackageRegistry().put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(FhirPackage.eNS_URI, FhirPackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(XhtmlPackage.eNS_URI, XhtmlPackage.eINSTANCE);
-		resourceSet.getPackageRegistry().put(NamespacePackage.eNS_URI, NamespacePackage.eINSTANCE);
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMLResourceFactoryImpl());
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(mapper));
+		Registrar.registerPackage(FhirPackage.eNS_URI, FhirPackage.eINSTANCE);
+		Registrar.registerPackage(XhtmlPackage.eNS_URI, XhtmlPackage.eINSTANCE);
+		Registrar.registerPackage(NamespacePackage.eNS_URI, NamespacePackage.eINSTANCE);
+		Registrar.associateExtension("xml", new XMLResourceFactoryImpl());
+		Registrar.associateExtension("json", new JsonResourceFactory(mapper));
 //		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 //		mapper.disable(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS);
 //		mapper.disable(DeserializationFeature.WRAP_EXCEPTIONS);
@@ -112,12 +115,33 @@ public class FHIRSDS implements Runnable {
 				return new ReferenceEntry.Base(parent, reference, parser.getText());
 			}
 		});
-		module.addSerializer(Uri.class, new FHIREMFPrimativeSerializer<Uri>());
-		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>());
+		module.addSerializer(Boolean.class, new FHIREMFPrimativeSerializer<Boolean>(Boolean.class));
+		module.addDeserializer(Boolean.class, new FHIREMFPrimativeDeserializer<Boolean>(Boolean.class));
 
-		module.addDeserializer(org.hl7.fhir.Resource.class, new ResourceDeserializer());
-		module.addDeserializer(ResourceContainerImpl.class, new FHIREMFResourceContainerDeserializer(ResourceContainerImpl.class));
-		module.addDeserializer(BundleType.class, new FHIREMFBundleTypeDeserializer());
+		module.addSerializer(Date.class, new FHIREMFPrimativeSerializer<Date>(Date.class));
+		module.addDeserializer(Date.class, new FHIREMFPrimativeDeserializer<Date>(Date.class));
+
+		module.addSerializer(DateTime.class, new FHIREMFPrimativeSerializer<DateTime>(DateTime.class));
+		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
+
+		module.addSerializer(Decimal.class, new FHIREMFPrimativeSerializer<Decimal>(Decimal.class));
+		module.addDeserializer(Decimal.class, new FHIREMFPrimativeDeserializer<Decimal>(Decimal.class));
+
+		module.addSerializer(String.class, new FHIREMFPrimativeSerializer<String>(String.class));
+		module.addDeserializer(String.class, new FHIREMFPrimativeDeserializer<String>(String.class));
+
+		module.addSerializer(Time.class, new FHIREMFPrimativeSerializer<Time>(Time.class));
+		module.addDeserializer(Time.class, new FHIREMFPrimativeDeserializer<Time>(Time.class));
+
+		module.addSerializer(Time.class, new FHIREMFPrimativeSerializer<Time>(Time.class));
+		module.addDeserializer(Time.class, new FHIREMFPrimativeDeserializer<Time>(Time.class));
+
+		module.addSerializer(Uri.class, new FHIREMFPrimativeSerializer<Uri>(Uri.class));
+		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>(Uri.class));
+
+//		module.addDeserializer(org.hl7.fhir.Resource.class, new ResourceDeserializer());
+//		module.addDeserializer(ResourceContainerImpl.class, new FHIREMFResourceContainerDeserializer(ResourceContainerImpl.class));
+//		module.addDeserializer(BundleType.class, new FHIREMFBundleTypeDeserializer());
 		mapper.registerModule(module);
 	}
 
@@ -125,7 +149,7 @@ public class FHIRSDS implements Runnable {
 		URI uri = URI.createURI(url.toString());
 		BufferedInputStream reader = null;
 		try {
-			resource = resourceSet.createResource(uri);
+			Resource resource = Registrar.createResource(uri);
 			reader = new BufferedInputStream(url.openConnection().getInputStream());
 			resource.load(reader, Collections.EMPTY_MAP);
 			EList<EObject> eList = resource.getContents();
@@ -147,8 +171,8 @@ public class FHIRSDS implements Runnable {
 			LOG.debug("uri=" + uri);
 			LOG.debug("resourceSet=" + resourceSet);
 			LOG.debug("resource=" + resource);
-			for (Map.Entry<java.lang.String, Object> entry : resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-					.entrySet()) {
+			for (Map.Entry<java.lang.String, Object> entry : resourceSet.getResourceFactoryRegistry()
+					.getExtensionToFactoryMap().entrySet()) {
 				LOG.debug("key=" + entry.getKey() + " value=" + entry.getValue().getClass().getName());
 			}
 			LOG.error("NPE", e);
@@ -158,11 +182,12 @@ public class FHIRSDS implements Runnable {
 		return null;
 	}
 
-	public static EObject loadFromJSON(InputStream reader, java.lang.String url, Class<?> clazz) {
-		URI uri = URI.createURI(url);
-		resource = resourceSet.createResource(uri);
+	public static EObject loadFromJSON(java.lang.String url, Class<?> clazz) {
+		InputStream reader = null;
 		EObject eObject = null;
+		URI uri = URI.createURI(url);
 		try {
+			reader = new FileInputStream(url);
 			JsonNode data = mapper.readTree(reader);
 			eObject = (EObject) mapper.reader()
 					.withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
@@ -170,7 +195,7 @@ public class FHIRSDS implements Runnable {
 					.forType(clazz)
 					.readValue(data);
 		} catch (IOException e) {
-			LOG.error("" , e);
+			LOG.error("", e);
 		}
 		return eObject;
 	}
@@ -185,7 +210,7 @@ public class FHIRSDS implements Runnable {
 			resource.save(writer, Collections.EMPTY_MAP);
 			writer.close();
 		} catch (IOException e) {
-			LOG.error("" , e);
+			LOG.error("", e);
 		}
 		return writer;
 	}
@@ -195,16 +220,21 @@ public class FHIRSDS implements Runnable {
 		BufferedOutputStream writer = null;
 		resource = resourceSet.createResource(uri);
 		resource.getContents().add(eObject);
-
+		java.lang.String s = null;
 		try {
 			writer = new BufferedOutputStream(new FileOutputStream(url));
-			java.lang.String s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(resource);
+			s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(resource);
 			writer.write(s.getBytes());
 			writer.close();
 		} catch (JsonProcessingException e) {
-			LOG.error("" , e);
+			LOG.error("", e);
 		} catch (IOException e) {
-			LOG.error("" , e);
+			LOG.error("", e);
+		} catch(NullPointerException e) {
+			LOG.error("mapper=" + mapper);
+			LOG.error("resource=" + resource);
+			LOG.error("s=" + s);
+			LOG.error("writer=" + writer);
 		}
 		return writer;
 	}
