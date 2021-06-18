@@ -47,171 +47,171 @@ public class DeserializeSwitch<T> extends FhirSwitch<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseBase64Binary(Base64Binary object) {
-		object = FhirFactory.eINSTANCE.createBase64Binary();
+	public T caseBase64Binary(Base64Binary eObject) {
+		eObject = FhirFactory.eINSTANCE.createBase64Binary();
 		try {
-			object.setValue(node.binaryValue());
+			eObject.setValue(node.binaryValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
-		return (T) object;
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseBoolean(Boolean object) {
-		object = FhirFactory.eINSTANCE.createBoolean();
-		object.setValue(node.asBoolean());
-		return (T) object;
+	public T caseBoolean(Boolean eObject) {
+		eObject = FhirFactory.eINSTANCE.createBoolean();
+		eObject.setValue(node.asBoolean());
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseContactPointSystem(ContactPointSystem object) {
-		object = FhirFactory.eINSTANCE.createContactPointSystem();
-		object.setValue(ContactPointSystemList.get(node.asText()));
-		return (T) object;
+	public T caseContactPointSystem(ContactPointSystem eObject) {
+		eObject = FhirFactory.eINSTANCE.createContactPointSystem();
+		eObject.setValue(ContactPointSystemList.get(node.asText()));
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseContactPointUse(ContactPointUse object) {
-		object = FhirFactory.eINSTANCE.createContactPointUse();
-		object.setValue(ContactPointUseList.get(node.asText()));
-		return (T) object;
+	public T caseContactPointUse(ContactPointUse eObject) {
+		eObject = FhirFactory.eINSTANCE.createContactPointUse();
+		eObject.setValue(ContactPointUseList.get(node.asText()));
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseDate(Date object) {
-		object = FhirFactory.eINSTANCE.createDate();
+	public T caseDate(Date eObject) {
+		eObject = FhirFactory.eINSTANCE.createDate();
 		try {
-			object.setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(node.asText()));
+			eObject.setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(node.asText()));
 		} catch (DatatypeConfigurationException e) {
 			LOG.error("", e);
 		}
-		return (T) object;
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseDateTime(DateTime object) {
-		object = FhirFactory.eINSTANCE.createDateTime();
+	public T caseDateTime(DateTime eObject) {
+		eObject = FhirFactory.eINSTANCE.createDateTime();
 		try {
-			object.setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(node.asText()));
+			eObject.setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(node.asText()));
 		} catch (DatatypeConfigurationException e) {
 			LOG.error("", e);
 		}
-		return (T) object;
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseDecimal(Decimal object) {
-		object = FhirFactory.eINSTANCE.createDecimal();
-		object.setValue(node.asDouble());
-		return (T) object;
+	public T caseDecimal(Decimal eObject) {
+		eObject = FhirFactory.eINSTANCE.createDecimal();
+		eObject.setValue(node.asDouble());
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseIdentifierUse(IdentifierUse object) {
-		object = FhirFactory.eINSTANCE.createIdentifierUse();
-		object.setValue(IdentifierUseList.get(node.asText()));
-		return (T) object;
+	public T caseIdentifierUse(IdentifierUse eObject) {
+		eObject = FhirFactory.eINSTANCE.createIdentifierUse();
+		eObject.setValue(IdentifierUseList.get(node.asText()));
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseInteger(Integer object) {
-		object = FhirFactory.eINSTANCE.createInteger();
-		object.setValue(node.asInt(0));
-		return (T) object;
+	public T caseInteger(Integer eObject) {
+		eObject = FhirFactory.eINSTANCE.createInteger();
+		eObject.setValue(node.asInt(0));
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseMarkdown(Markdown object) {
-		object = FhirFactory.eINSTANCE.createMarkdown();
-		object.setValue(node.asText());
-		return (T) object;
+	public T caseMarkdown(Markdown eObject) {
+		eObject = FhirFactory.eINSTANCE.createMarkdown();
+		eObject.setValue(node.asText());
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseNameUse(NameUse object) {
-		object = FhirFactory.eINSTANCE.createNameUse();
-		object.setValue(NameUseList.get(node.asText()));
-		return (T) object;
+	public T caseNameUse(NameUse eObject) {
+		eObject = FhirFactory.eINSTANCE.createNameUse();
+		eObject.setValue(NameUseList.get(node.asText()));
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseOid(Oid object) {
-		object = FhirFactory.eINSTANCE.createOid();
-		object.setValue(node.asText());
-		return (T) object;
+	public T caseOid(Oid eObject) {
+		eObject = FhirFactory.eINSTANCE.createOid();
+		eObject.setValue(node.asText());
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T casePositiveInt(PositiveInt object) {
-		object = FhirFactory.eINSTANCE.createPositiveInt();
-		object.setValue(BigInteger.valueOf(node.asInt()));
-		return (T) object;
+	public T casePositiveInt(PositiveInt eObject) {
+		eObject = FhirFactory.eINSTANCE.createPositiveInt();
+		eObject.setValue(BigInteger.valueOf(node.asInt()));
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseString(String object) {
-		object = FhirFactory.eINSTANCE.createString();
-		object.setValue(node.asText());
-		return (T) object;
+	public T caseString(String eObject) {
+		eObject = FhirFactory.eINSTANCE.createString();
+		eObject.setValue(node.asText());
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseTime(Time object) {
-		object = FhirFactory.eINSTANCE.createTime();
+	public T caseTime(Time eObject) {
+		eObject = FhirFactory.eINSTANCE.createTime();
 		try {
-			object.setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(node.asText()));
+			eObject.setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(node.asText()));
 		} catch (DatatypeConfigurationException e) {
 			LOG.error("", e);
 		}
-		return (T) object;
+		return (T) eObject;
 
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseUnsignedInt(UnsignedInt object) {
-		object = FhirFactory.eINSTANCE.createUnsignedInt();
-		object.setValue(BigInteger.valueOf(node.asInt()));
-		return (T) object;
+	public T caseUnsignedInt(UnsignedInt eObject) {
+		eObject = FhirFactory.eINSTANCE.createUnsignedInt();
+		eObject.setValue(BigInteger.valueOf(node.asInt()));
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseUri(Uri object) {
-		object = FhirFactory.eINSTANCE.createUri();
-		object.setValue(node.asText());
-		return (T) object;
+	public T caseUri(Uri eObject) {
+		eObject = FhirFactory.eINSTANCE.createUri();
+		eObject.setValue(node.asText());
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseUrl(Url object) {
-		object = FhirFactory.eINSTANCE.createUrl();
-		object.setValue(node.asText());
-		return (T) object;
+	public T caseUrl(Url eObject) {
+		eObject = FhirFactory.eINSTANCE.createUrl();
+		eObject.setValue(node.asText());
+		return (T) eObject;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T caseUuid(Uuid object) {
-		object = FhirFactory.eINSTANCE.createUuid();
-		object.setValue(node.asText());
-		return (T) object;
+	public T caseUuid(Uuid eObject) {
+		eObject = FhirFactory.eINSTANCE.createUuid();
+		eObject.setValue(node.asText());
+		return (T) eObject;
 	}
 
 	public JsonNode getNode() {

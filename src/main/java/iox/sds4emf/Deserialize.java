@@ -1,20 +1,19 @@
 package iox.sds4emf;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
-import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.commons.io.input.ReaderInputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.hl7.fhir.emf.Registrar;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.hl7.fhir.emf.util.Registrar;
 
 public class Deserialize extends Registrar {
 
@@ -23,20 +22,20 @@ public class Deserialize extends Registrar {
 	public static EObject it(String fileName) {
 		init();
 		java.net.URI uri = new File(fileName).toURI();
-		resource = getResourceSet().getResource(URI.createURI(uri.toString()), true);
+		Resource resource = getResourceSet().getResource(URI.createURI(uri.toString()), true);
 		EObject eObject = (EObject) resource.getContents().get(0);
-
 		return eObject;
 	}
 
-	public static EObject it(StringReader reader, String sUri) {
-		Charset charset = Charset.forName("US-ASCII");
-		return it(new ReaderInputStream(reader, charset), sUri);
+	public static EObject it(String s, String sUri) {
+		InputStream stream = new ByteArrayInputStream(s.getBytes());
+		return it(stream, sUri);
 	}
 
 	public static EObject it(InputStream reader, String sUri) {
 		init();
 		URI uri = URI.createURI(sUri);
+		Resource resource = null;
 		try {
 			resource = getResourceSet().createResource(uri);
 			resource.load(reader, Collections.EMPTY_MAP);

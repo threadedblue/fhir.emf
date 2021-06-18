@@ -39,9 +39,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseBase64Binary(Base64Binary object) {
+	public JsonGenerator caseBase64Binary(Base64Binary eObject) {
 		try {
-			gen.writeString(new java.lang.String(object.getValue()));
+			gen.writeString(new java.lang.String(eObject.getValue()));
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -49,9 +49,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseBoolean(Boolean object) {
+	public JsonGenerator caseBoolean(Boolean eObject) {
 		try {
-			gen.writeBoolean(object.isValue());
+			gen.writeBoolean(eObject.isValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -59,9 +59,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseContactPointSystem(ContactPointSystem object) {
+	public JsonGenerator caseContactPointSystem(ContactPointSystem eObject) {
 		try {
-			gen.writeString(object.getValue().getLiteral());
+			gen.writeString(eObject.getValue().getLiteral());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -69,9 +69,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseContactPointUse(ContactPointUse object) {
+	public JsonGenerator caseContactPointUse(ContactPointUse eObject) {
 		try {
-			gen.writeString(object.getValue().getLiteral());
+			gen.writeString(eObject.getValue().getLiteral());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -79,9 +79,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseDate(Date object) {
+	public JsonGenerator caseDate(Date eObject) {
 		try {
-			gen.writeString(object.getValue().toXMLFormat());
+			gen.writeString(eObject.getValue().toXMLFormat());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -89,9 +89,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseDateTime(DateTime object) {
+	public JsonGenerator caseDateTime(DateTime eObject) {
 		try {
-			gen.writeString(object.getValue().toXMLFormat());
+			gen.writeString(eObject.getValue().toXMLFormat());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -99,9 +99,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseDecimal(Decimal object) {
+	public JsonGenerator caseDecimal(Decimal eObject) {
 		try {
-			gen.writeNumber((java.lang.Double) object.getValue());
+			gen.writeNumber((java.lang.Double) eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -109,9 +109,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseIdentifierUse(IdentifierUse object) {
+	public JsonGenerator caseIdentifierUse(IdentifierUse eObject) {
 		try {
-			gen.writeString(object.getValue().getLiteral());
+			gen.writeString(eObject.getValue().getLiteral());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -119,9 +119,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseInteger(Integer object) {
+	public JsonGenerator caseInteger(Integer eObject) {
 		try {
-			gen.writeNumber((java.lang.Integer) object.getValue());
+			gen.writeNumber((java.lang.Integer) eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -129,9 +129,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseMarkdown(Markdown object) {
+	public JsonGenerator caseMarkdown(Markdown eObject) {
 		try {
-			gen.writeString(object.getValue());
+			gen.writeString(eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -139,9 +139,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseNameUse(NameUse object) {
+	public JsonGenerator caseNameUse(NameUse eObject) {
 		try {
-			gen.writeString(object.getValue().getLiteral());
+			gen.writeString(eObject.getValue().getLiteral());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -149,9 +149,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseOid(Oid object) {
+	public JsonGenerator caseOid(Oid eObject) {
 		try {
-			gen.writeString(object.getValue());
+			gen.writeString(eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -159,9 +159,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator casePositiveInt(PositiveInt object) {
+	public JsonGenerator casePositiveInt(PositiveInt eObject) {
 		try {
-			gen.writeNumber((BigInteger) object.getValue());
+			gen.writeNumber((BigInteger) eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -169,9 +169,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseString(String object) {
+	public JsonGenerator caseString(String eObject) {
 		try {
-			gen.writeString(object.getValue());
+			gen.writeString(eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -179,9 +179,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseTime(Time object) {
+	public JsonGenerator caseTime(Time eObject) {
 		try {
-			gen.writeString(object.getValue().toXMLFormat());
+			gen.writeString(eObject.getValue().toXMLFormat());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -189,9 +189,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseUnsignedInt(UnsignedInt object) {
+	public JsonGenerator caseUnsignedInt(UnsignedInt eObject) {
 		try {
-			gen.writeNumber((BigInteger) object.getValue());
+			gen.writeNumber((BigInteger) eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -199,9 +199,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseUri(Uri object) {
+	public JsonGenerator caseUri(Uri eObject) {
 		try {
-			gen.writeString(object.getValue());
+			gen.writeString(eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -209,9 +209,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseUrl(Url object) {
+	public JsonGenerator caseUrl(Url eObject) {
 		try {
-			gen.writeString(object.getValue());
+			gen.writeString(eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
@@ -219,9 +219,9 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	}
 
 	@Override
-	public JsonGenerator caseUuid(Uuid object) {
+	public JsonGenerator caseUuid(Uuid eObject) {
 		try {
-			gen.writeString(object.getValue());
+			gen.writeString(eObject.getValue());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}

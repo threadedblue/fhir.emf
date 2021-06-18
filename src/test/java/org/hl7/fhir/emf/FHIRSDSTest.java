@@ -2,12 +2,9 @@ package org.hl7.fhir.emf;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.emf.ecore.EObject;

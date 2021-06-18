@@ -1,4 +1,4 @@
-package org.hl7.fhir.emf;
+package org.hl7.fhir.emf.module;
 
 import org.emfjson.jackson.module.EMFModule;
 

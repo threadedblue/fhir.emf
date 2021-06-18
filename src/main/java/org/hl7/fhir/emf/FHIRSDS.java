@@ -49,6 +49,8 @@ import org.hl7.fhir.UnsignedInt;
 import org.hl7.fhir.Uri;
 import org.hl7.fhir.Url;
 import org.hl7.fhir.Uuid;
+import org.hl7.fhir.emf.module.FHIREMFModule;
+import org.hl7.fhir.emf.util.Registrar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3._1999.xhtml.XhtmlPackage;
@@ -180,44 +182,44 @@ public class FHIRSDS implements Runnable {
 		mapper.registerModule(module);
 	}
 
-	public static EObject load(URL url) {
-		URI uri = URI.createURI(url.toString());
-		BufferedInputStream reader = null;
-		try {
-			Resource resource = Registrar.createResource(uri);
-			reader = new BufferedInputStream(url.openConnection().getInputStream());
-			resource.load(reader, Collections.EMPTY_MAP);
-			EList<EObject> eList = resource.getContents();
-			if (eList.size() > 0) {
-				EObject eObject = (EObject) resource.getContents().get(0);
-				return eObject;
-			} else {
-				LOG.error("json=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("json"));
-				LOG.error("xml=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("xml"));
-				LOG.error("Resource had no contents; returning null");
-			}
-		} catch (IOException e) {
-			LOG.error("", e);
-		} catch (ClassCastException e) {
-			LOG.error("Cast", e);
-		} catch (NullPointerException e) {
-			LOG.debug("reader=" + reader);
-			LOG.debug("url=" + url);
-			LOG.debug("uri=" + uri);
-			LOG.debug("resourceSet=" + resourceSet);
-			LOG.debug("resource=" + resource);
-			for (Map.Entry<java.lang.String, Object> entry : resourceSet.getResourceFactoryRegistry()
-					.getExtensionToFactoryMap().entrySet()) {
-				LOG.debug("key=" + entry.getKey() + " value=" + entry.getValue().getClass().getName());
-			}
-			LOG.error("NPE", e);
-		} catch (Exception e) {
-			LOG.error("", e);
-		}
-		return null;
-	}
+//	public static EObject load(URL url) {
+//		URI uri = URI.createURI(url.toString());
+//		BufferedInputStream reader = null;
+//		try {
+//			Resource resource = Registrar.createResource(uri);
+//			reader = new BufferedInputStream(url.openConnection().getInputStream());
+//			resource.load(reader, Collections.EMPTY_MAP);
+//			EList<EObject> eList = resource.getContents();
+//			if (eList.size() > 0) {
+//				EObject eObject = (EObject) resource.getContents().get(0);
+//				return eObject;
+//			} else {
+//				LOG.error("json=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("json"));
+//				LOG.error("xml=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("xml"));
+//				LOG.error("Resource had no contents; returning null");
+//			}
+//		} catch (IOException e) {
+//			LOG.error("", e);
+//		} catch (ClassCastException e) {
+//			LOG.error("Cast", e);
+//		} catch (NullPointerException e) {
+//			LOG.debug("reader=" + reader);
+//			LOG.debug("url=" + url);
+//			LOG.debug("uri=" + uri);
+//			LOG.debug("resourceSet=" + resourceSet);
+//			LOG.debug("resource=" + resource);
+//			for (Map.Entry<java.lang.String, Object> entry : resourceSet.getResourceFactoryRegistry()
+//					.getExtensionToFactoryMap().entrySet()) {
+//				LOG.debug("key=" + entry.getKey() + " value=" + entry.getValue().getClass().getName());
+//			}
+//			LOG.error("NPE", e);
+//		} catch (Exception e) {
+//			LOG.error("", e);
+//		}
+//		return null;
+//	}
 
-	public static EObject loadFromJSON(java.lang.String url, Class<?> clazz) {
+	public static EObject load(java.lang.String url, Class<?> clazz) {
 		InputStream reader = null;
 		EObject eObject = null;
 		URI uri = URI.createURI(url);
@@ -235,22 +237,22 @@ public class FHIRSDS implements Runnable {
 		return eObject;
 	}
 
-	public static OutputStream save(EObject eObject, java.lang.String url) {
-		URI uri = URI.createURI(url);
-		BufferedOutputStream writer = null;
-		resource = resourceSet.createResource(uri);
-		resource.getContents().add(eObject);
-		try {
-			writer = new BufferedOutputStream(new FileOutputStream(url));
-			resource.save(writer, Collections.EMPTY_MAP);
-			writer.close();
-		} catch (IOException e) {
-			LOG.error("", e);
-		}
-		return writer;
-	}
+//	public static OutputStream save(EObject eObject, java.lang.String url) {
+//		URI uri = URI.createURI(url);
+//		BufferedOutputStream writer = null;
+//		resource = resourceSet.createResource(uri);
+//		resource.getContents().add(eObject);
+//		try {
+//			writer = new BufferedOutputStream(new FileOutputStream(url));
+//			resource.save(writer, Collections.EMPTY_MAP);
+//			writer.close();
+//		} catch (IOException e) {
+//			LOG.error("", e);
+//		}
+//		return writer;
+//	}
 
-	public static OutputStream saveAsJSON(EObject eObject, java.lang.String url) {
+	public static OutputStream save(EObject eObject, java.lang.String url) {
 		URI uri = URI.createURI(url);
 		BufferedOutputStream writer = null;
 		resource = resourceSet.createResource(uri);

@@ -1,4 +1,4 @@
-package org.hl7.fhir.emf;
+package org.hl7.fhir.emf.util;
 
 import java.net.URL;
 import java.util.HashSet;

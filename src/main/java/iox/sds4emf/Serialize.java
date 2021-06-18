@@ -9,7 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.hl7.fhir.emf.Registrar;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.hl7.fhir.emf.util.Registrar;
 
 public class Serialize extends Registrar {
 
@@ -18,7 +19,7 @@ public class Serialize extends Registrar {
 	public static String it(EObject eObject, String uriString) {
 
 		init();
-		resource = resourceSet.createResource(URI.createURI(uriString));
+		Resource resource = resourceSet.createResource(URI.createURI(uriString));
 		resource.getContents().add(eObject);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
@@ -33,6 +34,7 @@ public class Serialize extends Registrar {
 	public static OutputStream it(EObject eObject, String uriString, OutputStream stream) {
 
 		init();
+		Resource resource = null;
 		try {
 			resource = resourceSet.createResource(URI.createURI(uriString));
 			resource.getContents().add(eObject);

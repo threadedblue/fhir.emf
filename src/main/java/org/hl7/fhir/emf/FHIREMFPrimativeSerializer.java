@@ -3,15 +3,6 @@ package org.hl7.fhir.emf;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.EObject;
-import org.hl7.fhir.Base64Binary;
-import org.hl7.fhir.Boolean;
-import org.hl7.fhir.Date;
-import org.hl7.fhir.DateTime;
-import org.hl7.fhir.Decimal;
-import org.hl7.fhir.Integer;
-import org.hl7.fhir.String;
-import org.hl7.fhir.Time;
-import org.hl7.fhir.Uri;
 import org.hl7.fhir.emf.util.SerializeSwitch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
