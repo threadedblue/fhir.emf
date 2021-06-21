@@ -1,13 +1,10 @@
 package org.hl7.fhir.emf;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Locale;
@@ -21,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
 import org.emfjson.jackson.databind.deser.ReferenceEntry;
@@ -72,31 +68,36 @@ public class FHIRSDS implements Runnable {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FHIRSDS.class);
 
+	public enum FORMAT {
+		XML, JSON, RDF_TTL, RDF_N3, FHIR_PATH
+	}
+
 	private static ResourceSet resourceSet = Registrar.getResourceSet();
 	private static Resource resource;
 	private static FHIREMFModule module = new FHIREMFModule();
 	private static ObjectMapper mapper = new ObjectMapper();
+	public static final java.lang.String RESOURCE_TYPE = "resourceType";
+	public static final java.lang.String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+	public static final URI DEFAULT_URI = URI.createURI("http://localhost");
 	static {
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH));
+		mapper.setDateFormat(new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH));
 		mapper.setTimeZone(TimeZone.getDefault());
 		LOG.debug("mapper set==>");
 		Registrar.registerPackage(FhirPackage.eNS_URI, FhirPackage.eINSTANCE);
 		Registrar.registerPackage(XhtmlPackage.eNS_URI, XhtmlPackage.eINSTANCE);
 		Registrar.registerPackage(NamespacePackage.eNS_URI, NamespacePackage.eINSTANCE);
-		Registrar.associateExtension("xml", new XMLResourceFactoryImpl());
-		Registrar.associateExtension("json", new JsonResourceFactory(mapper));
 
 		module.setTypeInfo(new EcoreTypeInfo("resourceType", new ValueReader<java.lang.String, EClass>() {
 			@Override
 			public EClass readValue(java.lang.String value, DeserializationContext context) {
-				LOG.debug("Called type deser==>");
+				LOG.trace("Called type deser==>");
 				return (EClass) FhirPackage.eINSTANCE.getEClassifier(value);
 			}
 		}, new ValueWriter<EClass, java.lang.String>() {
 			@Override
 			public java.lang.String writeValue(EClass value, SerializerProvider context) {
-				LOG.debug("Called type ser==>");
+				LOG.trace("Called type ser==>");
 				return value.getName();
 			}
 		}));
@@ -104,14 +105,14 @@ public class FHIRSDS implements Runnable {
 		module.setReferenceSerializer(new JsonSerializer<EObject>() {
 			@Override
 			public void serialize(EObject v, JsonGenerator g, SerializerProvider s) throws IOException {
-				LOG.debug("Called ref ser==>");
+				LOG.trace("Called ref ser==>");
 				g.writeString(((JsonResource) v.eResource()).getID(v));
 			}
 		});
 		module.setReferenceDeserializer(new JsonDeserializer<ReferenceEntry>() {
 			@Override
 			public ReferenceEntry deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException {
-				LOG.debug("Called ref deser==>");
+				LOG.trace("Called ref deser==>");
 				final EObject parent = EMFContext.getParent(ctxt);
 				final EReference reference = EMFContext.getReference(ctxt);
 
@@ -122,6 +123,9 @@ public class FHIRSDS implements Runnable {
 				return new ReferenceEntry.Base(parent, reference, parser.getText());
 			}
 		});
+		
+		LOG.trace("Called add ser/deser==>");
+		
 		module.addSerializer(Base64Binary.class, new FHIREMFPrimativeSerializer());
 		module.addDeserializer(Base64Binary.class, new FHIREMFPrimativeDeserializer<Base64Binary>());
 
@@ -182,59 +186,87 @@ public class FHIRSDS implements Runnable {
 		mapper.registerModule(module);
 	}
 
-//	public static EObject load(URL url) {
-//		URI uri = URI.createURI(url.toString());
-//		BufferedInputStream reader = null;
-//		try {
-//			Resource resource = Registrar.createResource(uri);
-//			reader = new BufferedInputStream(url.openConnection().getInputStream());
-//			resource.load(reader, Collections.EMPTY_MAP);
-//			EList<EObject> eList = resource.getContents();
-//			if (eList.size() > 0) {
-//				EObject eObject = (EObject) resource.getContents().get(0);
-//				return eObject;
-//			} else {
-//				LOG.error("json=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("json"));
-//				LOG.error("xml=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("xml"));
-//				LOG.error("Resource had no contents; returning null");
-//			}
-//		} catch (IOException e) {
-//			LOG.error("", e);
-//		} catch (ClassCastException e) {
-//			LOG.error("Cast", e);
-//		} catch (NullPointerException e) {
-//			LOG.debug("reader=" + reader);
-//			LOG.debug("url=" + url);
-//			LOG.debug("uri=" + uri);
-//			LOG.debug("resourceSet=" + resourceSet);
-//			LOG.debug("resource=" + resource);
-//			for (Map.Entry<java.lang.String, Object> entry : resourceSet.getResourceFactoryRegistry()
-//					.getExtensionToFactoryMap().entrySet()) {
-//				LOG.debug("key=" + entry.getKey() + " value=" + entry.getValue().getClass().getName());
-//			}
-//			LOG.error("NPE", e);
-//		} catch (Exception e) {
-//			LOG.error("", e);
-//		}
-//		return null;
-//	}
+	public static EObject load(java.lang.String url, FORMAT fmt) {
+		java.net.URI uri = java.net.URI.create(url);
+		return load(uri, fmt);
+	}
 
-	public static EObject load(java.lang.String url, Class<?> clazz) {
+	public static EObject load(java.net.URI uri, FORMAT fmt) {
 		InputStream reader = null;
-		EObject eObject = null;
-		URI uri = URI.createURI(url);
 		try {
-			reader = new FileInputStream(url);
-			JsonNode data = mapper.readTree(reader);
-			eObject = (EObject) mapper.reader()
-					.withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
-					.withAttribute(EMFContext.Attributes.RESOURCE_URI, uri)
-					.forType(clazz)
-					.readValue(data);
+			reader = uri.toURL().openStream();
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
+		return load(reader, fmt);
+	}
+
+	public static EObject load(InputStream reader, FORMAT fmt) {
+		EObject eObject = null;
+		switch (fmt) {
+		case XML:
+			try {
+				Resource resource = Registrar.createResource(DEFAULT_URI);
+				resource.load(reader, Collections.EMPTY_MAP);
+				EList<EObject> eList = resource.getContents();
+				if (eList.size() > 0) {
+					eObject = (EObject) resource.getContents().get(0);
+					return eObject;
+				} else {
+					LOG.error(
+							"json=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("json"));
+					LOG.error("xml=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("xml"));
+					LOG.error("Resource had no contents; returning null");
+				}
+			} catch (IOException e) {
+				LOG.error("", e);
+			} catch (ClassCastException e) {
+				LOG.error("Cast", e);
+			} catch (NullPointerException e) {
+				LOG.debug("reader=" + reader);
+				LOG.debug("resourceSet=" + resourceSet);
+				LOG.debug("resource=" + resource);
+				for (Map.Entry<java.lang.String, Object> entry : resourceSet.getResourceFactoryRegistry()
+						.getExtensionToFactoryMap().entrySet()) {
+					LOG.debug("key=" + entry.getKey() + " value=" + entry.getValue().getClass().getName());
+				}
+				LOG.error("NPE", e);
+			} catch (Exception e) {
+				LOG.error("", e);
+			}
+			return null;
+		case JSON:
+			Registrar.associateExtension("json", new JsonResourceFactory(mapper));
+			try {
+				JsonNode data = mapper.readTree(reader);
+				Class<?> clazz = findResourceType(data);
+				eObject = (EObject) mapper.reader()
+						.withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
+						.withAttribute(EMFContext.Attributes.RESOURCE_URI, DEFAULT_URI)
+						.forType(clazz)
+						.readValue(data);
+			} catch (IOException | ClassNotFoundException e) {
+				LOG.error("", e);
+			}
+			break;
+		case RDF_TTL:
+//			Registrar.associateExtension("ttl", new TTLResourceFactoryImpl());
+			break;
+		case RDF_N3:
+//			Registrar.associateExtension("n3", new N3ResourceFactory());
+			break;
+		case FHIR_PATH:
+//			Registrar.associateExtension("path", new FHIRPatHResourceFactory());
+			break;
+		default:
+		}
 		return eObject;
+	}
+
+	static Class<?> findResourceType(JsonNode json) throws ClassNotFoundException {
+		JsonNode rT = json.findPath(RESOURCE_TYPE);
+		java.lang.String className = rT.asText();
+		return Class.forName(java.lang.String.format("org.hl7.fhir.%s", className));
 	}
 
 //	public static OutputStream save(EObject eObject, java.lang.String url) {
@@ -252,7 +284,7 @@ public class FHIRSDS implements Runnable {
 //		return writer;
 //	}
 
-	public static OutputStream save(EObject eObject, java.lang.String url) {
+	public static OutputStream save(EObject eObject, java.lang.String url, FORMAT fmt) {
 		URI uri = URI.createURI(url);
 		BufferedOutputStream writer = null;
 		resource = resourceSet.createResource(uri);
@@ -267,7 +299,7 @@ public class FHIRSDS implements Runnable {
 			LOG.error("", e);
 		} catch (IOException e) {
 			LOG.error("", e);
-		} catch(NullPointerException e) {
+		} catch (NullPointerException e) {
 			LOG.error("mapper=" + mapper);
 			LOG.error("resource=" + resource);
 			LOG.error("s=" + s);
@@ -282,7 +314,7 @@ public class FHIRSDS implements Runnable {
 
 	public static void main(String[] args) {
 		FHIRSDS app = new FHIRSDS();
-		URL patientURL = app.getClass().getClassLoader().getResource("Alicia.json");
-		FHIRSDS.load(patientURL);
+//		URL patientURL = app.getClass().getClassLoader().getResource("Alicia.json");
+//		FHIRSDS.load(patientURL);
 	}
 }

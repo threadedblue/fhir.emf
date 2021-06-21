@@ -29,7 +29,6 @@ public class FHIREMFPrimativeDeserializer<T> extends StdDeserializer<T> {
 		super(clazz);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 
