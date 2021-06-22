@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
 import org.emfjson.jackson.databind.deser.ReferenceEntry;
@@ -27,11 +28,15 @@ import org.emfjson.jackson.utils.ValueReader;
 import org.emfjson.jackson.utils.ValueWriter;
 import org.hl7.fhir.Base64Binary;
 import org.hl7.fhir.Boolean;
+import org.hl7.fhir.Bundle;
+import org.hl7.fhir.BundleEntry;
+import org.hl7.fhir.BundleType;
 import org.hl7.fhir.ContactPointSystem;
 import org.hl7.fhir.ContactPointUse;
 import org.hl7.fhir.Date;
 import org.hl7.fhir.DateTime;
 import org.hl7.fhir.Decimal;
+import org.hl7.fhir.FhirFactory;
 import org.hl7.fhir.FhirPackage;
 import org.hl7.fhir.IdentifierUse;
 import org.hl7.fhir.Integer;
@@ -39,6 +44,7 @@ import org.hl7.fhir.Markdown;
 import org.hl7.fhir.NameUse;
 import org.hl7.fhir.Oid;
 import org.hl7.fhir.PositiveInt;
+import org.hl7.fhir.ResourceContainer;
 import org.hl7.fhir.String;
 import org.hl7.fhir.Time;
 import org.hl7.fhir.UnsignedInt;
@@ -63,13 +69,19 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.base.Enums;
 
 public class FHIRSDS implements Runnable {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FHIRSDS.class);
 
 	public enum FORMAT {
-		XML, JSON, RDF_TTL, RDF_N3, FHIR_PATH
+		xml, json, ttl, n3, fhirPath
+	}
+
+	public enum COLLECTION {
+		Bundle, COMPOSITION, DOMAINRESOURCE, GROUP, LIST
 	}
 
 	private static ResourceSet resourceSet = Registrar.getResourceSet();
@@ -78,7 +90,7 @@ public class FHIRSDS implements Runnable {
 	private static ObjectMapper mapper = new ObjectMapper();
 	public static final java.lang.String RESOURCE_TYPE = "resourceType";
 	public static final java.lang.String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
-	public static final URI DEFAULT_URI = URI.createURI("http://localhost");
+	public static final java.lang.String DEFAULT_URI = "http://localhost";
 	static {
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		mapper.setDateFormat(new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH));
@@ -87,6 +99,12 @@ public class FHIRSDS implements Runnable {
 		Registrar.registerPackage(FhirPackage.eNS_URI, FhirPackage.eINSTANCE);
 		Registrar.registerPackage(XhtmlPackage.eNS_URI, XhtmlPackage.eINSTANCE);
 		Registrar.registerPackage(NamespacePackage.eNS_URI, NamespacePackage.eINSTANCE);
+		Registrar.associateExtension(FORMAT.xml.name(), new XMLResourceFactoryImpl());
+		Registrar.associateExtension(FORMAT.json.name(), new JsonResourceFactory(mapper));
+//	These are not yet implemented.  
+//		Registrar.associateExtension(FORMAT.ttl.name(), new RDFResourceFactoryImpl());
+//		Registrar.associateExtension(FORMAT.n3.name(), new RDFResourceFactoryImpl());
+//		Registrar.associateExtension(FORMAT.fhirPath.name(), new FHIRPathResourceFactoryImpl());
 
 		module.setTypeInfo(new EcoreTypeInfo("resourceType", new ValueReader<java.lang.String, EClass>() {
 			@Override
@@ -123,65 +141,71 @@ public class FHIRSDS implements Runnable {
 				return new ReferenceEntry.Base(parent, reference, parser.getText());
 			}
 		});
-		
+
 		LOG.trace("Called add ser/deser==>");
-		
+
 		module.addSerializer(Base64Binary.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Base64Binary.class, new FHIREMFPrimativeDeserializer<Base64Binary>());
+		module.addDeserializer(Base64Binary.class, new FHIREMFPrimativeDeserializer<Base64Binary>(Base64Binary.class));
 
 		module.addSerializer(Boolean.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Boolean.class, new FHIREMFPrimativeDeserializer<Boolean>());
+		module.addDeserializer(Boolean.class, new FHIREMFPrimativeDeserializer<Boolean>(Boolean.class));
+
+		module.addSerializer(BundleType.class, new FHIREMFPrimativeSerializer());
+		module.addDeserializer(BundleType.class, new FHIREMFPrimativeDeserializer<BundleType>(BundleType.class));
 
 		module.addSerializer(ContactPointSystem.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(ContactPointSystem.class, new FHIREMFPrimativeDeserializer<ContactPointSystem>());
+		module.addDeserializer(ContactPointSystem.class,
+				new FHIREMFPrimativeDeserializer<ContactPointSystem>(ContactPointSystem.class));
 
 		module.addSerializer(ContactPointUse.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(ContactPointUse.class, new FHIREMFPrimativeDeserializer<ContactPointUse>());
+		module.addDeserializer(ContactPointUse.class,
+				new FHIREMFPrimativeDeserializer<ContactPointUse>(ContactPointUse.class));
 
 		module.addSerializer(Date.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Date.class, new FHIREMFPrimativeDeserializer<Date>());
+		module.addDeserializer(Date.class, new FHIREMFPrimativeDeserializer<Date>(Date.class));
 
 		module.addSerializer(DateTime.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>());
+		module.addDeserializer(DateTime.class, new FHIREMFPrimativeDeserializer<DateTime>(DateTime.class));
 
 		module.addSerializer(Decimal.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Decimal.class, new FHIREMFPrimativeDeserializer<Decimal>());
+		module.addDeserializer(Decimal.class, new FHIREMFPrimativeDeserializer<Decimal>(Decimal.class));
 
 		module.addSerializer(IdentifierUse.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(IdentifierUse.class, new FHIREMFPrimativeDeserializer<IdentifierUse>());
+		module.addDeserializer(IdentifierUse.class,
+				new FHIREMFPrimativeDeserializer<IdentifierUse>(IdentifierUse.class));
 
 		module.addSerializer(Integer.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Integer.class, new FHIREMFPrimativeDeserializer<Integer>());
+		module.addDeserializer(Integer.class, new FHIREMFPrimativeDeserializer<Integer>(Integer.class));
 
 		module.addSerializer(Markdown.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Markdown.class, new FHIREMFPrimativeDeserializer<Markdown>());
+		module.addDeserializer(Markdown.class, new FHIREMFPrimativeDeserializer<Markdown>(Markdown.class));
 
 		module.addSerializer(NameUse.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(NameUse.class, new FHIREMFPrimativeDeserializer<NameUse>());
+		module.addDeserializer(NameUse.class, new FHIREMFPrimativeDeserializer<NameUse>(NameUse.class));
 
 		module.addSerializer(Oid.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Oid.class, new FHIREMFPrimativeDeserializer<Oid>());
+		module.addDeserializer(Oid.class, new FHIREMFPrimativeDeserializer<Oid>(Oid.class));
 
 		module.addSerializer(PositiveInt.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(PositiveInt.class, new FHIREMFPrimativeDeserializer<PositiveInt>());
+		module.addDeserializer(PositiveInt.class, new FHIREMFPrimativeDeserializer<PositiveInt>(PositiveInt.class));
 
 		module.addSerializer(String.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(String.class, new FHIREMFPrimativeDeserializer<String>());
+		module.addDeserializer(String.class, new FHIREMFPrimativeDeserializer<String>(String.class));
 
 		module.addSerializer(Time.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Time.class, new FHIREMFPrimativeDeserializer<Time>());
+		module.addDeserializer(Time.class, new FHIREMFPrimativeDeserializer<Time>(Time.class));
 
 		module.addSerializer(UnsignedInt.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(UnsignedInt.class, new FHIREMFPrimativeDeserializer<UnsignedInt>());
+		module.addDeserializer(UnsignedInt.class, new FHIREMFPrimativeDeserializer<UnsignedInt>(UnsignedInt.class));
 
 		module.addSerializer(Uri.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>());
+		module.addDeserializer(Uri.class, new FHIREMFPrimativeDeserializer<Uri>(Uri.class));
 
 		module.addSerializer(Url.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Url.class, new FHIREMFPrimativeDeserializer<Url>());
+		module.addDeserializer(Url.class, new FHIREMFPrimativeDeserializer<Url>(Url.class));
 
 		module.addSerializer(Uuid.class, new FHIREMFPrimativeSerializer());
-		module.addDeserializer(Uuid.class, new FHIREMFPrimativeDeserializer<Uuid>());
+		module.addDeserializer(Uuid.class, new FHIREMFPrimativeDeserializer<Uuid>(Uuid.class));
 
 		mapper.registerModule(module);
 	}
@@ -204,18 +228,18 @@ public class FHIRSDS implements Runnable {
 	public static EObject load(InputStream reader, FORMAT fmt) {
 		EObject eObject = null;
 		switch (fmt) {
-		case XML:
+		case xml:
 			try {
-				Resource resource = Registrar.createResource(DEFAULT_URI);
+				URI uri = URI.createURI(java.lang.String.format("%s/.%s", DEFAULT_URI, FORMAT.xml.name()));
+				Resource resource = Registrar.createResource(uri);
 				resource.load(reader, Collections.EMPTY_MAP);
 				EList<EObject> eList = resource.getContents();
 				if (eList.size() > 0) {
 					eObject = (EObject) resource.getContents().get(0);
 					return eObject;
 				} else {
-					LOG.error(
-							"json=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("json"));
-					LOG.error("xml=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().get("xml"));
+					LOG.error("XML=" + resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+							.get(FORMAT.xml.name()));
 					LOG.error("Resource had no contents; returning null");
 				}
 			} catch (IOException e) {
@@ -235,32 +259,64 @@ public class FHIRSDS implements Runnable {
 				LOG.error("", e);
 			}
 			return null;
-		case JSON:
-			Registrar.associateExtension("json", new JsonResourceFactory(mapper));
+		case json:
 			try {
-				JsonNode data = mapper.readTree(reader);
-				Class<?> clazz = findResourceType(data);
-				eObject = (EObject) mapper.reader()
-						.withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
-						.withAttribute(EMFContext.Attributes.RESOURCE_URI, DEFAULT_URI)
-						.forType(clazz)
-						.readValue(data);
+				JsonNode json = mapper.readTree(reader);
+				ObjectNode objectNode = json.deepCopy();
+				if(isCollection(json)) {
+					JsonNode entries = objectNode.findPath("entry");
+					objectNode.remove("entry");
+					Bundle bundle = (Bundle)load(objectNode);
+					for(JsonNode entry : entries) {
+						JsonNode resource = entry.findPath("resource");
+						EObject eObject1 = load(resource);
+						BundleEntry bundleEntry = FhirFactory.eINSTANCE.createBundleEntry();
+						ResourceContainer resourceContainer = FhirFactory.eINSTANCE.createResourceContainer();
+						resourceContainer.setPatient(eObject1);
+						bundleEntry.setResource(resourceContainer);
+						bundle.getEntry().add(bundleEntry);
+					}
+				}
 			} catch (IOException | ClassNotFoundException e) {
 				LOG.error("", e);
 			}
 			break;
-		case RDF_TTL:
-//			Registrar.associateExtension("ttl", new TTLResourceFactoryImpl());
-			break;
-		case RDF_N3:
-//			Registrar.associateExtension("n3", new N3ResourceFactory());
-			break;
-		case FHIR_PATH:
-//			Registrar.associateExtension("path", new FHIRPatHResourceFactory());
-			break;
+		case ttl:
+		case n3:
+		case fhirPath:
 		default:
 		}
 		return eObject;
+	}
+
+	static EObject load(JsonNode data) throws IOException, ClassNotFoundException {
+		Class<?> clazz = findResourceType(data);
+		return (EObject) mapper.reader().withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
+				.withAttribute(EMFContext.Attributes.RESOURCE_URI, DEFAULT_URI).forType(clazz).readValue(data);
+	}
+	
+//	public static EObject loadFromJSON(java.lang.String url, Class<?> clazz) {
+//		InputStream reader = null;
+//		EObject eObject = null;
+//		URI uri = URI.createURI(url);
+//		try {
+//			reader = new FileInputStream(url);
+//			JsonNode data = mapper.readTree(reader);
+//			eObject = (EObject) mapper.reader()
+//					.withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
+//					.withAttribute(EMFContext.Attributes.RESOURCE_URI, uri)
+//					.forType(clazz)
+//					.readValue(data);
+//		} catch (IOException e) {
+//			LOG.error("", e);
+//		}
+//		return eObject;
+//	}
+
+	static boolean isCollection(JsonNode json) {
+		JsonNode rT = json.findPath(RESOURCE_TYPE);
+		java.lang.String className = rT.asText();
+		return Enums.getIfPresent(COLLECTION.class, className).isPresent();
 	}
 
 	static Class<?> findResourceType(JsonNode json) throws ClassNotFoundException {
@@ -285,6 +341,57 @@ public class FHIRSDS implements Runnable {
 //	}
 
 	public static OutputStream save(EObject eObject, java.lang.String url, FORMAT fmt) {
+		switch (fmt) {
+		case XML:
+		case JSON:
+			Registrar.associateExtension("json", new JsonResourceFactory(mapper));
+			URI uri = URI.createURI(url);
+			BufferedOutputStream writer = null;
+			resource = Registrar.createResource(uri);
+			resource.getContents().add(eObject);
+			java.lang.String s = null;
+			try {
+				writer = new BufferedOutputStream(new FileOutputStream(url));
+				s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(resource);
+				writer.write(s.getBytes());
+				writer.close();
+			} catch (JsonProcessingException e) {
+				LOG.error("", e);
+			} catch (IOException e) {
+				LOG.error("", e);
+			} catch (NullPointerException e) {
+				LOG.error("mapper=" + mapper);
+				LOG.error("resource=" + resource);
+				LOG.error("s=" + s);
+				LOG.error("writer=" + writer);
+			}
+			return writer;
+		default:
+		}
+		URI uri = URI.createURI(url);
+		BufferedOutputStream writer = null;
+		resource = resourceSet.createResource(uri);
+		resource.getContents().add(eObject);
+		java.lang.String s = null;
+		try {
+			writer = new BufferedOutputStream(new FileOutputStream(url));
+			s = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(resource);
+			writer.write(s.getBytes());
+			writer.close();
+		} catch (JsonProcessingException e) {
+			LOG.error("", e);
+		} catch (IOException e) {
+			LOG.error("", e);
+		} catch (NullPointerException e) {
+			LOG.error("mapper=" + mapper);
+			LOG.error("resource=" + resource);
+			LOG.error("s=" + s);
+			LOG.error("writer=" + writer);
+		}
+		return writer;
+	}
+
+	public static OutputStream saveAsJSON(EObject eObject, java.lang.String url) {
 		URI uri = URI.createURI(url);
 		BufferedOutputStream writer = null;
 		resource = resourceSet.createResource(uri);

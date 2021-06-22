@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 import org.hl7.fhir.Base64Binary;
 import org.hl7.fhir.Boolean;
+import org.hl7.fhir.BundleType;
 import org.hl7.fhir.ContactPointSystem;
 import org.hl7.fhir.ContactPointUse;
 import org.hl7.fhir.Date;
@@ -52,6 +53,16 @@ public class SerializeSwitch extends FhirSwitch<JsonGenerator> {
 	public JsonGenerator caseBoolean(Boolean eObject) {
 		try {
 			gen.writeBoolean(eObject.isValue());
+		} catch (IOException e) {
+			LOG.error("", e);
+		}
+		return gen;
+	}
+
+	@Override
+	public JsonGenerator caseBundleType(BundleType eObject) {
+		try {
+			gen.writeString(eObject.getValue().getLiteral());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}

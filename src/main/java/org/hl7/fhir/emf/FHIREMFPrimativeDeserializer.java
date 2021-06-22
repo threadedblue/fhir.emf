@@ -2,8 +2,14 @@ package org.hl7.fhir.emf;
 
 import java.io.IOException;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.hl7.fhir.FhirPackage;
 import org.hl7.fhir.emf.util.DeserializeSwitch;
+import org.hl7.fhir.emf.util.Registrar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +31,8 @@ public class FHIREMFPrimativeDeserializer<T> extends StdDeserializer<T> {
 		this(null);
 	}
 
-	public FHIREMFPrimativeDeserializer(Class<EObject> clazz) {
-		super(clazz);
+	public FHIREMFPrimativeDeserializer(Class<?> clazz) {
+		super((Class<?>) clazz);
 	}
 	
 	@Override
@@ -34,6 +40,14 @@ public class FHIREMFPrimativeDeserializer<T> extends StdDeserializer<T> {
 
 		JsonNode node = jp.getCodec().readTree(jp);
 		dSwitch.setNode(node);
-		return dSwitch.doSwitch(null);
+		String typeName = handledType().getSimpleName();
+		EPackage ePackage = Registrar.getPackageRegistry().getEPackage(FhirPackage.eNS_URI);
+		EClassifier eClassifier = ePackage.getEClassifier(typeName);
+		EClass eClass = (EClass) eClassifier;
+		EObject eObject = EcoreUtil.create(eClass);
+		LOG.debug("typeName=" + typeName);
+		T t = dSwitch.doSwitch(eObject);
+		LOG.debug("t=" + t);
+		return t;
 	}
 }

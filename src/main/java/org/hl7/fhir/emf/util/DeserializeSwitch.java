@@ -8,6 +8,8 @@ import javax.xml.datatype.DatatypeFactory;
 
 import org.hl7.fhir.Base64Binary;
 import org.hl7.fhir.Boolean;
+import org.hl7.fhir.BundleType;
+import org.hl7.fhir.BundleTypeList;
 import org.hl7.fhir.ContactPointSystem;
 import org.hl7.fhir.ContactPointSystemList;
 import org.hl7.fhir.ContactPointUse;
@@ -62,6 +64,14 @@ public class DeserializeSwitch<T> extends FhirSwitch<T> {
 	public T caseBoolean(Boolean eObject) {
 		eObject = FhirFactory.eINSTANCE.createBoolean();
 		eObject.setValue(node.asBoolean());
+		return (T) eObject;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public T caseBundleType(BundleType eObject) {
+		eObject = FhirFactory.eINSTANCE.createBundleType();
+		eObject.setValue(BundleTypeList.get(node.asText()));
 		return (T) eObject;
 	}
 
