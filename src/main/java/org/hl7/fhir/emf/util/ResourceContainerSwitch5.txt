@@ -1,1013 +1,1303 @@
+@SuppressWarnings("unchecked")
 @Override
 public T caseAccount(Account eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setAccount(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseActivityDefinition(ActivityDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setActivityDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseAdverseEvent(AdverseEvent eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setAdverseEvent(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseAllergyIntolerance(AllergyIntolerance eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setAllergyIntolerance(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseAppointment(Appointment eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setAppointment(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseAppointmentResponse(AppointmentResponse eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setAppointmentResponse(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseAuditEvent(AuditEvent eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setAuditEvent(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseBasic(Basic eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setBasic(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseBinary(Binary eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setBinary(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseBiologicallyDerivedProduct(BiologicallyDerivedProduct eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setBiologicallyDerivedProduct(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseBodyStructure(BodyStructure eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setBodyStructure(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseBundle(Bundle eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setBundle(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCapabilityStatement(CapabilityStatement eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCapabilityStatement(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCarePlan(CarePlan eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCarePlan(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCareTeam(CareTeam eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCareTeam(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCatalogEntry(CatalogEntry eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCatalogEntry(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseChargeItem(ChargeItem eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setChargeItem(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseChargeItemDefinition(ChargeItemDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setChargeItemDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseClaim(Claim eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setClaim(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseClaimResponse(ClaimResponse eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setClaimResponse(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseClinicalImpression(ClinicalImpression eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setClinicalImpression(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCodeSystem(CodeSystem eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCodeSystem(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCommunication(Communication eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCommunication(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCommunicationRequest(CommunicationRequest eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCommunicationRequest(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCompartmentDefinition(CompartmentDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCompartmentDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseComposition(Composition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setComposition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseConceptMap(ConceptMap eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setConceptMap(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCondition(Condition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCondition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseConsent(Consent eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setConsent(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseContract(Contract eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setContract(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCoverage(Coverage eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCoverage(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCoverageEligibilityRequest(CoverageEligibilityRequest eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCoverageEligibilityRequest(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseCoverageEligibilityResponse(CoverageEligibilityResponse eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setCoverageEligibilityResponse(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDetectedIssue(DetectedIssue eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDetectedIssue(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDevice(Device eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDevice(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDeviceDefinition(DeviceDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDeviceDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDeviceMetric(DeviceMetric eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDeviceMetric(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDeviceRequest(DeviceRequest eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDeviceRequest(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDeviceUseStatement(DeviceUseStatement eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDeviceUseStatement(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDiagnosticReport(DiagnosticReport eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDiagnosticReport(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDocumentManifest(DocumentManifest eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDocumentManifest(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseDocumentReference(DocumentReference eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setDocumentReference(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEffectEvidenceSynthesis(EffectEvidenceSynthesis eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEffectEvidenceSynthesis(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEncounter(Encounter eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEncounter(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEndpoint(Endpoint eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEndpoint(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEnrollmentRequest(EnrollmentRequest eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEnrollmentRequest(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEnrollmentResponse(EnrollmentResponse eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEnrollmentResponse(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEpisodeOfCare(EpisodeOfCare eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEpisodeOfCare(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEventDefinition(EventDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEventDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEvidence(Evidence eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEvidence(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseEvidenceVariable(EvidenceVariable eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setEvidenceVariable(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseExampleScenario(ExampleScenario eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setExampleScenario(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseExplanationOfBenefit(ExplanationOfBenefit eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setExplanationOfBenefit(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseFamilyMemberHistory(FamilyMemberHistory eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setFamilyMemberHistory(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseFlag(Flag eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setFlag(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseGoal(Goal eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setGoal(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseGraphDefinition(GraphDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setGraphDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseGroup(Group eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setGroup(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseGuidanceResponse(GuidanceResponse eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setGuidanceResponse(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseHealthcareService(HealthcareService eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setHealthcareService(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseImagingStudy(ImagingStudy eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setImagingStudy(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseImmunization(Immunization eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setImmunization(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseImmunizationEvaluation(ImmunizationEvaluation eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setImmunizationEvaluation(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseImmunizationRecommendation(ImmunizationRecommendation eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setImmunizationRecommendation(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseImplementationGuide(ImplementationGuide eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setImplementationGuide(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseInsurancePlan(InsurancePlan eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setInsurancePlan(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseInvoice(Invoice eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setInvoice(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseLibrary(Library eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setLibrary(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseLinkage(Linkage eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setLinkage(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseList(List eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setList(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseLocation(Location eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setLocation(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMeasure(Measure eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMeasure(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMeasureReport(MeasureReport eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMeasureReport(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedia(Media eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedia(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedication(Medication eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedication(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicationAdministration(MedicationAdministration eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicationAdministration(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicationDispense(MedicationDispense eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicationDispense(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicationKnowledge(MedicationKnowledge eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicationKnowledge(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicationRequest(MedicationRequest eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicationRequest(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicationStatement(MedicationStatement eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicationStatement(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProduct(MedicinalProduct eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProduct(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductAuthorization(MedicinalProductAuthorization eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductAuthorization(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductContraindication(MedicinalProductContraindication eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductContraindication(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductIndication(MedicinalProductIndication eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductIndication(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductIngredient(MedicinalProductIngredient eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductIngredient(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductInteraction(MedicinalProductInteraction eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductInteraction(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductManufactured(MedicinalProductManufactured eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductManufactured(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductPackaged(MedicinalProductPackaged eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductPackaged(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductPharmaceutical(MedicinalProductPharmaceutical eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductPharmaceutical(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMedicinalProductUndesirableEffect(MedicinalProductUndesirableEffect eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMedicinalProductUndesirableEffect(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMessageDefinition(MessageDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMessageDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMessageHeader(MessageHeader eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMessageHeader(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseMolecularSequence(MolecularSequence eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setMolecularSequence(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseNamingSystem(NamingSystem eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setNamingSystem(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseNutritionOrder(NutritionOrder eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setNutritionOrder(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseObservation(Observation eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setObservation(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseObservationDefinition(ObservationDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setObservationDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseOperationDefinition(OperationDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setOperationDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseOperationOutcome(OperationOutcome eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setOperationOutcome(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseOrganization(Organization eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setOrganization(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseOrganizationAffiliation(OrganizationAffiliation eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setOrganizationAffiliation(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseParameters(Parameters eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setParameters(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T casePatient(Patient eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setPatient(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T casePaymentNotice(PaymentNotice eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setPaymentNotice(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T casePaymentReconciliation(PaymentReconciliation eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setPaymentReconciliation(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T casePerson(Person eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setPerson(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T casePlanDefinition(PlanDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setPlanDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T casePractitioner(Practitioner eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setPractitioner(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T casePractitionerRole(PractitionerRole eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setPractitionerRole(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseProcedure(Procedure eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setProcedure(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseProvenance(Provenance eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setProvenance(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseQuestionnaire(Questionnaire eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setQuestionnaire(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseQuestionnaireResponse(QuestionnaireResponse eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setQuestionnaireResponse(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseRelatedPerson(RelatedPerson eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setRelatedPerson(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseRequestGroup(RequestGroup eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setRequestGroup(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseResearchDefinition(ResearchDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setResearchDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseResearchElementDefinition(ResearchElementDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setResearchElementDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseResearchStudy(ResearchStudy eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setResearchStudy(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseResearchSubject(ResearchSubject eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setResearchSubject(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseRiskAssessment(RiskAssessment eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setRiskAssessment(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseRiskEvidenceSynthesis(RiskEvidenceSynthesis eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setRiskEvidenceSynthesis(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSchedule(Schedule eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSchedule(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSearchParameter(SearchParameter eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSearchParameter(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseServiceRequest(ServiceRequest eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setServiceRequest(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSlot(Slot eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSlot(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSpecimen(Specimen eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSpecimen(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSpecimenDefinition(SpecimenDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSpecimenDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseStructureDefinition(StructureDefinition eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setStructureDefinition(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseStructureMap(StructureMap eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setStructureMap(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSubscription(Subscription eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSubscription(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSubstance(Substance eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSubstance(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSubstancePolymer(SubstancePolymer eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSubstancePolymer(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSubstanceProtein(SubstanceProtein eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSubstanceProtein(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSubstanceReferenceInformation(SubstanceReferenceInformation eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSubstanceReferenceInformation(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSubstanceSpecification(SubstanceSpecification eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSubstanceSpecification(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSubstanceSourceMaterial(SubstanceSourceMaterial eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSubstanceSourceMaterial(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSupplyDelivery(SupplyDelivery eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSupplyDelivery(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseSupplyRequest(SupplyRequest eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setSupplyRequest(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseTask(Task eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setTask(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseTerminologyCapabilities(TerminologyCapabilities eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setTerminologyCapabilities(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseTestReport(TestReport eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setTestReport(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseTestScript(TestScript eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setTestScript(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseValueSet(ValueSet eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setValueSet(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseVerificationResult(VerificationResult eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setVerificationResult(eObject);
 return (T) container;
 }
 
 
+@SuppressWarnings("unchecked")
 @Override
 public T caseVisionPrescription(VisionPrescription eObject) {
+ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 container.setVisionPrescription(eObject);
 return (T) container;
 }

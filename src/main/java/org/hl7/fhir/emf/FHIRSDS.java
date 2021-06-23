@@ -53,6 +53,7 @@ import org.hl7.fhir.Url;
 import org.hl7.fhir.Uuid;
 import org.hl7.fhir.emf.module.FHIREMFModule;
 import org.hl7.fhir.emf.util.Registrar;
+import org.hl7.fhir.emf.util.ResourceContainerSwitch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3._1999.xhtml.XhtmlPackage;
@@ -91,6 +92,7 @@ public class FHIRSDS implements Runnable {
 	public static final java.lang.String RESOURCE_TYPE = "resourceType";
 	public static final java.lang.String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 	public static final java.lang.String DEFAULT_URI = "http://localhost";
+	public static final ResourceContainerSwitch resourceContainerSwitch =  new ResourceContainerSwitch();
 	static {
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		mapper.setDateFormat(new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH));
@@ -271,11 +273,11 @@ public class FHIRSDS implements Runnable {
 						JsonNode resource = entry.findPath("resource");
 						EObject eObject1 = load(resource);
 						BundleEntry bundleEntry = FhirFactory.eINSTANCE.createBundleEntry();
-						ResourceContainer resourceContainer = FhirFactory.eINSTANCE.createResourceContainer();
-						resourceContainer.setPatient(eObject1);
+						ResourceContainer resourceContainer = (ResourceContainer) resourceContainerSwitch.doSwitch(eObject1);
 						bundleEntry.setResource(resourceContainer);
 						bundle.getEntry().add(bundleEntry);
 					}
+					return bundle;
 				}
 			} catch (IOException | ClassNotFoundException e) {
 				LOG.error("", e);
@@ -342,8 +344,8 @@ public class FHIRSDS implements Runnable {
 
 	public static OutputStream save(EObject eObject, java.lang.String url, FORMAT fmt) {
 		switch (fmt) {
-		case XML:
-		case JSON:
+		case xml:
+		case json:
 			Registrar.associateExtension("json", new JsonResourceFactory(mapper));
 			URI uri = URI.createURI(url);
 			BufferedOutputStream writer = null;

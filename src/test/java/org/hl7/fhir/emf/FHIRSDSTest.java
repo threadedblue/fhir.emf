@@ -37,7 +37,7 @@ class FHIRSDSTest {
 		EObject eObject = FHIRSDS.load(reader, FHIRSDS.FORMAT.json);
 		assertNotNull(eObject);
 		Bundle bundle = (Bundle) eObject;
-		assertEquals(3, bundle.getEntry().size());
+		assertEquals(135, bundle.getEntry().size());
 	}
 
 //	@Test

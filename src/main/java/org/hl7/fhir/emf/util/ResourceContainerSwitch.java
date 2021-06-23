@@ -3,890 +3,1024 @@ package org.hl7.fhir.emf.util;
 import org.hl7.fhir.*;
 import org.hl7.fhir.util.FhirSwitch;
 
-public class ResourceContainerSwitch<T> extends FhirSwitch<T> {
+public class ResourceContainerSwitch extends FhirSwitch<ResourceContainer> {
 
-	ResourceContainer container;
-
-	public ResourceContainerSwitch(ResourceContainer container) {
+	public ResourceContainerSwitch() {
 		super();
-		this.container = container;
 	}
 
 	@Override
-	public T caseAccount(Account eObject) {
+	public ResourceContainer caseAccount(Account eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
 		container.setAccount(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseActivityDefinition(ActivityDefinition eObject) {
-		container.setActivityDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseAdverseEvent(AdverseEvent eObject) {
-		container.setAdverseEvent(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseAllergyIntolerance(AllergyIntolerance eObject) {
-		container.setAllergyIntolerance(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseAppointment(Appointment eObject) {
-		container.setAppointment(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseAppointmentResponse(AppointmentResponse eObject) {
-		container.setAppointmentResponse(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseAuditEvent(AuditEvent eObject) {
-		container.setAuditEvent(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseBasic(Basic eObject) {
-		container.setBasic(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseBinary(Binary eObject) {
-		container.setBinary(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseBiologicallyDerivedProduct(BiologicallyDerivedProduct eObject) {
-		container.setBiologicallyDerivedProduct(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseBodyStructure(BodyStructure eObject) {
-		container.setBodyStructure(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseBundle(Bundle eObject) {
-		container.setBundle(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCapabilityStatement(CapabilityStatement eObject) {
-		container.setCapabilityStatement(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCarePlan(CarePlan eObject) {
-		container.setCarePlan(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCareTeam(CareTeam eObject) {
-		container.setCareTeam(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCatalogEntry(CatalogEntry eObject) {
-		container.setCatalogEntry(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseChargeItem(ChargeItem eObject) {
-		container.setChargeItem(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseChargeItemDefinition(ChargeItemDefinition eObject) {
-		container.setChargeItemDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseClaim(Claim eObject) {
-		container.setClaim(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseClaimResponse(ClaimResponse eObject) {
-		container.setClaimResponse(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseClinicalImpression(ClinicalImpression eObject) {
-		container.setClinicalImpression(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCodeSystem(CodeSystem eObject) {
-		container.setCodeSystem(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCommunication(Communication eObject) {
-		container.setCommunication(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCommunicationRequest(CommunicationRequest eObject) {
-		container.setCommunicationRequest(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCompartmentDefinition(CompartmentDefinition eObject) {
-		container.setCompartmentDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseComposition(Composition eObject) {
-		container.setComposition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseConceptMap(ConceptMap eObject) {
-		container.setConceptMap(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCondition(Condition eObject) {
-		container.setCondition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseConsent(Consent eObject) {
-		container.setConsent(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseContract(Contract eObject) {
-		container.setContract(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCoverage(Coverage eObject) {
-		container.setCoverage(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCoverageEligibilityRequest(CoverageEligibilityRequest eObject) {
-		container.setCoverageEligibilityRequest(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseCoverageEligibilityResponse(CoverageEligibilityResponse eObject) {
-		container.setCoverageEligibilityResponse(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDetectedIssue(DetectedIssue eObject) {
-		container.setDetectedIssue(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDevice(Device eObject) {
-		container.setDevice(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDeviceDefinition(DeviceDefinition eObject) {
-		container.setDeviceDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDeviceMetric(DeviceMetric eObject) {
-		container.setDeviceMetric(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDeviceRequest(DeviceRequest eObject) {
-		container.setDeviceRequest(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDeviceUseStatement(DeviceUseStatement eObject) {
-		container.setDeviceUseStatement(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDiagnosticReport(DiagnosticReport eObject) {
-		container.setDiagnosticReport(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDocumentManifest(DocumentManifest eObject) {
-		container.setDocumentManifest(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseDocumentReference(DocumentReference eObject) {
-		container.setDocumentReference(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEffectEvidenceSynthesis(EffectEvidenceSynthesis eObject) {
-		container.setEffectEvidenceSynthesis(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEncounter(Encounter eObject) {
-		container.setEncounter(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEndpoint(Endpoint eObject) {
-		container.setEndpoint(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEnrollmentRequest(EnrollmentRequest eObject) {
-		container.setEnrollmentRequest(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEnrollmentResponse(EnrollmentResponse eObject) {
-		container.setEnrollmentResponse(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEpisodeOfCare(EpisodeOfCare eObject) {
-		container.setEpisodeOfCare(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEventDefinition(EventDefinition eObject) {
-		container.setEventDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEvidence(Evidence eObject) {
-		container.setEvidence(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseEvidenceVariable(EvidenceVariable eObject) {
-		container.setEvidenceVariable(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseExampleScenario(ExampleScenario eObject) {
-		container.setExampleScenario(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseExplanationOfBenefit(ExplanationOfBenefit eObject) {
-		container.setExplanationOfBenefit(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseFamilyMemberHistory(FamilyMemberHistory eObject) {
-		container.setFamilyMemberHistory(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseFlag(Flag eObject) {
-		container.setFlag(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseGoal(Goal eObject) {
-		container.setGoal(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseGraphDefinition(GraphDefinition eObject) {
-		container.setGraphDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseGroup(Group eObject) {
-		container.setGroup(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseGuidanceResponse(GuidanceResponse eObject) {
-		container.setGuidanceResponse(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseHealthcareService(HealthcareService eObject) {
-		container.setHealthcareService(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseImagingStudy(ImagingStudy eObject) {
-		container.setImagingStudy(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseImmunization(Immunization eObject) {
-		container.setImmunization(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseImmunizationEvaluation(ImmunizationEvaluation eObject) {
-		container.setImmunizationEvaluation(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseImmunizationRecommendation(ImmunizationRecommendation eObject) {
-		container.setImmunizationRecommendation(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseImplementationGuide(ImplementationGuide eObject) {
-		container.setImplementationGuide(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseInsurancePlan(InsurancePlan eObject) {
-		container.setInsurancePlan(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseInvoice(Invoice eObject) {
-		container.setInvoice(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseLibrary(Library eObject) {
-		container.setLibrary(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseLinkage(Linkage eObject) {
-		container.setLinkage(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseList(List eObject) {
-		container.setList(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseLocation(Location eObject) {
-		container.setLocation(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMeasure(Measure eObject) {
-		container.setMeasure(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMeasureReport(MeasureReport eObject) {
-		container.setMeasureReport(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedia(Media eObject) {
-		container.setMedia(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedication(Medication eObject) {
-		container.setMedication(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicationAdministration(MedicationAdministration eObject) {
-		container.setMedicationAdministration(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicationDispense(MedicationDispense eObject) {
-		container.setMedicationDispense(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicationKnowledge(MedicationKnowledge eObject) {
-		container.setMedicationKnowledge(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicationRequest(MedicationRequest eObject) {
-		container.setMedicationRequest(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicationStatement(MedicationStatement eObject) {
-		container.setMedicationStatement(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProduct(MedicinalProduct eObject) {
-		container.setMedicinalProduct(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductAuthorization(MedicinalProductAuthorization eObject) {
-		container.setMedicinalProductAuthorization(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductContraindication(MedicinalProductContraindication eObject) {
-		container.setMedicinalProductContraindication(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductIndication(MedicinalProductIndication eObject) {
-		container.setMedicinalProductIndication(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductIngredient(MedicinalProductIngredient eObject) {
-		container.setMedicinalProductIngredient(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductInteraction(MedicinalProductInteraction eObject) {
-		container.setMedicinalProductInteraction(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductManufactured(MedicinalProductManufactured eObject) {
-		container.setMedicinalProductManufactured(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductPackaged(MedicinalProductPackaged eObject) {
-		container.setMedicinalProductPackaged(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductPharmaceutical(MedicinalProductPharmaceutical eObject) {
-		container.setMedicinalProductPharmaceutical(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMedicinalProductUndesirableEffect(MedicinalProductUndesirableEffect eObject) {
-		container.setMedicinalProductUndesirableEffect(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMessageDefinition(MessageDefinition eObject) {
-		container.setMessageDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMessageHeader(MessageHeader eObject) {
-		container.setMessageHeader(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseMolecularSequence(MolecularSequence eObject) {
-		container.setMolecularSequence(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseNamingSystem(NamingSystem eObject) {
-		container.setNamingSystem(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseNutritionOrder(NutritionOrder eObject) {
-		container.setNutritionOrder(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseObservation(Observation eObject) {
-		container.setObservation(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseObservationDefinition(ObservationDefinition eObject) {
-		container.setObservationDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseOperationDefinition(OperationDefinition eObject) {
-		container.setOperationDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseOperationOutcome(OperationOutcome eObject) {
-		container.setOperationOutcome(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseOrganization(Organization eObject) {
-		container.setOrganization(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseOrganizationAffiliation(OrganizationAffiliation eObject) {
-		container.setOrganizationAffiliation(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseParameters(Parameters eObject) {
-		container.setParameters(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T casePatient(Patient eObject) {
-		container.setPatient(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T casePaymentNotice(PaymentNotice eObject) {
-		container.setPaymentNotice(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T casePaymentReconciliation(PaymentReconciliation eObject) {
-		container.setPaymentReconciliation(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T casePerson(Person eObject) {
-		container.setPerson(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T casePlanDefinition(PlanDefinition eObject) {
-		container.setPlanDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T casePractitioner(Practitioner eObject) {
-		container.setPractitioner(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T casePractitionerRole(PractitionerRole eObject) {
-		container.setPractitionerRole(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseProcedure(Procedure eObject) {
-		container.setProcedure(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseProvenance(Provenance eObject) {
-		container.setProvenance(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseQuestionnaire(Questionnaire eObject) {
-		container.setQuestionnaire(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseQuestionnaireResponse(QuestionnaireResponse eObject) {
-		container.setQuestionnaireResponse(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseRelatedPerson(RelatedPerson eObject) {
-		container.setRelatedPerson(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseRequestGroup(RequestGroup eObject) {
-		container.setRequestGroup(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseResearchDefinition(ResearchDefinition eObject) {
-		container.setResearchDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseResearchElementDefinition(ResearchElementDefinition eObject) {
-		container.setResearchElementDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseResearchStudy(ResearchStudy eObject) {
-		container.setResearchStudy(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseResearchSubject(ResearchSubject eObject) {
-		container.setResearchSubject(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseRiskAssessment(RiskAssessment eObject) {
-		container.setRiskAssessment(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseRiskEvidenceSynthesis(RiskEvidenceSynthesis eObject) {
-		container.setRiskEvidenceSynthesis(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSchedule(Schedule eObject) {
-		container.setSchedule(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSearchParameter(SearchParameter eObject) {
-		container.setSearchParameter(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseServiceRequest(ServiceRequest eObject) {
-		container.setServiceRequest(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSlot(Slot eObject) {
-		container.setSlot(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSpecimen(Specimen eObject) {
-		container.setSpecimen(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSpecimenDefinition(SpecimenDefinition eObject) {
-		container.setSpecimenDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseStructureDefinition(StructureDefinition eObject) {
-		container.setStructureDefinition(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseStructureMap(StructureMap eObject) {
-		container.setStructureMap(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSubscription(Subscription eObject) {
-		container.setSubscription(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSubstance(Substance eObject) {
-		container.setSubstance(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSubstancePolymer(SubstancePolymer eObject) {
-		container.setSubstancePolymer(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSubstanceProtein(SubstanceProtein eObject) {
-		container.setSubstanceProtein(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSubstanceReferenceInformation(SubstanceReferenceInformation eObject) {
-		container.setSubstanceReferenceInformation(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSubstanceSpecification(SubstanceSpecification eObject) {
-		container.setSubstanceSpecification(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSubstanceSourceMaterial(SubstanceSourceMaterial eObject) {
-		container.setSubstanceSourceMaterial(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSupplyDelivery(SupplyDelivery eObject) {
-		container.setSupplyDelivery(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseSupplyRequest(SupplyRequest eObject) {
-		container.setSupplyRequest(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseTask(Task eObject) {
-		container.setTask(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseTerminologyCapabilities(TerminologyCapabilities eObject) {
-		container.setTerminologyCapabilities(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseTestReport(TestReport eObject) {
-		container.setTestReport(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseTestScript(TestScript eObject) {
-		container.setTestScript(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseValueSet(ValueSet eObject) {
-		container.setValueSet(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseVerificationResult(VerificationResult eObject) {
-		container.setVerificationResult(eObject);
-		return (T) container;
-	}
-
-	@Override
-	public T caseVisionPrescription(VisionPrescription eObject) {
-		container.setVisionPrescription(eObject);
-		return (T) container;
-	}
-
-	public ResourceContainer getContainer() {
 		return container;
 	}
 
-	public void setContainer(ResourceContainer container) {
-		this.container = container;
+	@Override
+	public ResourceContainer caseActivityDefinition(ActivityDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setActivityDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseAdverseEvent(AdverseEvent eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setAdverseEvent(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseAllergyIntolerance(AllergyIntolerance eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setAllergyIntolerance(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseAppointment(Appointment eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setAppointment(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseAppointmentResponse(AppointmentResponse eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setAppointmentResponse(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseAuditEvent(AuditEvent eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setAuditEvent(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseBasic(Basic eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setBasic(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseBinary(Binary eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setBinary(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseBiologicallyDerivedProduct(BiologicallyDerivedProduct eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setBiologicallyDerivedProduct(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseBodyStructure(BodyStructure eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setBodyStructure(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseBundle(Bundle eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setBundle(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCapabilityStatement(CapabilityStatement eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCapabilityStatement(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCarePlan(CarePlan eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCarePlan(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCareTeam(CareTeam eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCareTeam(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCatalogEntry(CatalogEntry eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCatalogEntry(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseChargeItem(ChargeItem eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setChargeItem(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseChargeItemDefinition(ChargeItemDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setChargeItemDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseClaim(Claim eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setClaim(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseClaimResponse(ClaimResponse eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setClaimResponse(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseClinicalImpression(ClinicalImpression eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setClinicalImpression(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCodeSystem(CodeSystem eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCodeSystem(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCommunication(Communication eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCommunication(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCommunicationRequest(CommunicationRequest eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCommunicationRequest(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCompartmentDefinition(CompartmentDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCompartmentDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseComposition(Composition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setComposition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseConceptMap(ConceptMap eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setConceptMap(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCondition(Condition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCondition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseConsent(Consent eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setConsent(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseContract(Contract eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setContract(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCoverage(Coverage eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCoverage(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCoverageEligibilityRequest(CoverageEligibilityRequest eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCoverageEligibilityRequest(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseCoverageEligibilityResponse(CoverageEligibilityResponse eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setCoverageEligibilityResponse(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDetectedIssue(DetectedIssue eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDetectedIssue(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDevice(Device eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDevice(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDeviceDefinition(DeviceDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDeviceDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDeviceMetric(DeviceMetric eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDeviceMetric(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDeviceRequest(DeviceRequest eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDeviceRequest(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDeviceUseStatement(DeviceUseStatement eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDeviceUseStatement(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDiagnosticReport(DiagnosticReport eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDiagnosticReport(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDocumentManifest(DocumentManifest eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDocumentManifest(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseDocumentReference(DocumentReference eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setDocumentReference(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEffectEvidenceSynthesis(EffectEvidenceSynthesis eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEffectEvidenceSynthesis(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEncounter(Encounter eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEncounter(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEndpoint(Endpoint eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEndpoint(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEnrollmentRequest(EnrollmentRequest eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEnrollmentRequest(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEnrollmentResponse(EnrollmentResponse eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEnrollmentResponse(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEpisodeOfCare(EpisodeOfCare eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEpisodeOfCare(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEventDefinition(EventDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEventDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEvidence(Evidence eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEvidence(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseEvidenceVariable(EvidenceVariable eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setEvidenceVariable(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseExampleScenario(ExampleScenario eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setExampleScenario(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseExplanationOfBenefit(ExplanationOfBenefit eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setExplanationOfBenefit(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseFamilyMemberHistory(FamilyMemberHistory eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setFamilyMemberHistory(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseFlag(Flag eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setFlag(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseGoal(Goal eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setGoal(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseGraphDefinition(GraphDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setGraphDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseGroup(Group eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setGroup(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseGuidanceResponse(GuidanceResponse eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setGuidanceResponse(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseHealthcareService(HealthcareService eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setHealthcareService(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseImagingStudy(ImagingStudy eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setImagingStudy(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseImmunization(Immunization eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setImmunization(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseImmunizationEvaluation(ImmunizationEvaluation eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setImmunizationEvaluation(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseImmunizationRecommendation(ImmunizationRecommendation eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setImmunizationRecommendation(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseImplementationGuide(ImplementationGuide eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setImplementationGuide(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseInsurancePlan(InsurancePlan eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setInsurancePlan(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseInvoice(Invoice eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setInvoice(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseLibrary(Library eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setLibrary(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseLinkage(Linkage eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setLinkage(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseList(List eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setList(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseLocation(Location eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setLocation(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMeasure(Measure eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMeasure(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMeasureReport(MeasureReport eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMeasureReport(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedia(Media eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedia(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedication(Medication eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedication(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicationAdministration(MedicationAdministration eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicationAdministration(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicationDispense(MedicationDispense eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicationDispense(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicationKnowledge(MedicationKnowledge eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicationKnowledge(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicationRequest(MedicationRequest eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicationRequest(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicationStatement(MedicationStatement eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicationStatement(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProduct(MedicinalProduct eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProduct(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductAuthorization(MedicinalProductAuthorization eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductAuthorization(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductContraindication(MedicinalProductContraindication eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductContraindication(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductIndication(MedicinalProductIndication eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductIndication(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductIngredient(MedicinalProductIngredient eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductIngredient(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductInteraction(MedicinalProductInteraction eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductInteraction(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductManufactured(MedicinalProductManufactured eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductManufactured(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductPackaged(MedicinalProductPackaged eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductPackaged(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductPharmaceutical(MedicinalProductPharmaceutical eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductPharmaceutical(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMedicinalProductUndesirableEffect(MedicinalProductUndesirableEffect eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMedicinalProductUndesirableEffect(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMessageDefinition(MessageDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMessageDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMessageHeader(MessageHeader eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMessageHeader(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseMolecularSequence(MolecularSequence eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setMolecularSequence(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseNamingSystem(NamingSystem eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setNamingSystem(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseNutritionOrder(NutritionOrder eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setNutritionOrder(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseObservation(Observation eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setObservation(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseObservationDefinition(ObservationDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setObservationDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseOperationDefinition(OperationDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setOperationDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseOperationOutcome(OperationOutcome eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setOperationOutcome(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseOrganization(Organization eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setOrganization(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseOrganizationAffiliation(OrganizationAffiliation eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setOrganizationAffiliation(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseParameters(Parameters eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setParameters(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer casePatient(Patient eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setPatient(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer casePaymentNotice(PaymentNotice eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setPaymentNotice(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer casePaymentReconciliation(PaymentReconciliation eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setPaymentReconciliation(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer casePerson(Person eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setPerson(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer casePlanDefinition(PlanDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setPlanDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer casePractitioner(Practitioner eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setPractitioner(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer casePractitionerRole(PractitionerRole eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setPractitionerRole(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseProcedure(Procedure eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setProcedure(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseProvenance(Provenance eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setProvenance(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseQuestionnaire(Questionnaire eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setQuestionnaire(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseQuestionnaireResponse(QuestionnaireResponse eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setQuestionnaireResponse(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseRelatedPerson(RelatedPerson eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setRelatedPerson(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseRequestGroup(RequestGroup eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setRequestGroup(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseResearchDefinition(ResearchDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setResearchDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseResearchElementDefinition(ResearchElementDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setResearchElementDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseResearchStudy(ResearchStudy eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setResearchStudy(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseResearchSubject(ResearchSubject eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setResearchSubject(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseRiskAssessment(RiskAssessment eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setRiskAssessment(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseRiskEvidenceSynthesis(RiskEvidenceSynthesis eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setRiskEvidenceSynthesis(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSchedule(Schedule eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSchedule(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSearchParameter(SearchParameter eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSearchParameter(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseServiceRequest(ServiceRequest eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setServiceRequest(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSlot(Slot eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSlot(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSpecimen(Specimen eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSpecimen(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSpecimenDefinition(SpecimenDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSpecimenDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseStructureDefinition(StructureDefinition eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setStructureDefinition(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseStructureMap(StructureMap eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setStructureMap(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSubscription(Subscription eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSubscription(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSubstance(Substance eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSubstance(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSubstancePolymer(SubstancePolymer eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSubstancePolymer(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSubstanceProtein(SubstanceProtein eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSubstanceProtein(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSubstanceReferenceInformation(SubstanceReferenceInformation eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSubstanceReferenceInformation(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSubstanceSpecification(SubstanceSpecification eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSubstanceSpecification(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSubstanceSourceMaterial(SubstanceSourceMaterial eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSubstanceSourceMaterial(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSupplyDelivery(SupplyDelivery eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSupplyDelivery(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseSupplyRequest(SupplyRequest eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setSupplyRequest(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseTask(Task eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setTask(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseTerminologyCapabilities(TerminologyCapabilities eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setTerminologyCapabilities(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseTestReport(TestReport eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setTestReport(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseTestScript(TestScript eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setTestScript(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseValueSet(ValueSet eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setValueSet(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseVerificationResult(VerificationResult eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setVerificationResult(eObject);
+		return container;
+	}
+
+	@Override
+	public ResourceContainer caseVisionPrescription(VisionPrescription eObject) {
+		ResourceContainer container = FhirFactory.eINSTANCE.createResourceContainer();
+		container.setVisionPrescription(eObject);
+		return container;
 	}
 }
