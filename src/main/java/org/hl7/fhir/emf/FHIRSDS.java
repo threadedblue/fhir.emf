@@ -52,6 +52,7 @@ import org.hl7.fhir.Uri;
 import org.hl7.fhir.Url;
 import org.hl7.fhir.Uuid;
 import org.hl7.fhir.emf.module.FHIREMFModule;
+import org.hl7.fhir.emf.resource.FHIREMFResourceFactory;
 import org.hl7.fhir.emf.util.Registrar;
 import org.hl7.fhir.emf.util.ResourceContainerSwitch;
 import org.slf4j.Logger;
@@ -102,7 +103,7 @@ public class FHIRSDS implements Runnable {
 		Registrar.registerPackage(XhtmlPackage.eNS_URI, XhtmlPackage.eINSTANCE);
 		Registrar.registerPackage(NamespacePackage.eNS_URI, NamespacePackage.eINSTANCE);
 		Registrar.associateExtension(FORMAT.xml.name(), new XMLResourceFactoryImpl());
-		Registrar.associateExtension(FORMAT.json.name(), new JsonResourceFactory(mapper));
+		Registrar.associateExtension(FORMAT.json.name(), new FHIREMFResourceFactory(mapper));
 //	These are not yet implemented.  
 //		Registrar.associateExtension(FORMAT.ttl.name(), new RDFResourceFactoryImpl());
 //		Registrar.associateExtension(FORMAT.n3.name(), new RDFResourceFactoryImpl());

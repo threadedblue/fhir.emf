@@ -46,7 +46,6 @@ class FHIRSDSTest {
 		OutputStream writer = FHIRSDS.save(bundle, "data/bundle.json", FHIRSDS.FORMAT.json);
 		assertNotNull(writer);
 	}
-	
 
 	Bundle createBundle() {
 		Bundle bundle = FhirFactory.eINSTANCE.createBundle();
