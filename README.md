@@ -1,11 +1,11 @@
 # fhir.emf
 
-## A full implemtation of the FHIR 4.0.1 specification built using EMF (eclipse modeling framework).  
+## A full implemtation of the HL7/FHIR 4.0.1 specification built using EMF (eclipse modeling framework).  
 &nbsp;
 
 This project is intended to be used as a data model.  A likely use case might be as the model component of a webservice.  
 
-Code is generated using the [XML schema](http://hl7.org/fhir/R4/xml.html#schema) taken from the FHIR specification.  This schema(s) can be found in the model directory.
+Code is generated using the [XML schema](http://hl7.org/fhir/R4/xml.html#schema) taken from the HL7/FHIR specification.  This schema(s) can be found in the model directory.
 
     model/fhir-codegen-xsd  
 
