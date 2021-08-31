@@ -40,7 +40,7 @@ If one is new to EMF, one should be advised that EMF uses factories as opposed t
         <version>1.3.0/version>
     </dependency>
 
-### The following are not available through Maven Central.  The must be installed from the ecliipse distribution.
+### The following are not available through Maven Central.  They must be installed from the ecliipse distribution.
     <dependency>
         <groupId>org.eclipse.emf</groupId>
         <artifactId>org.eclipse.emf.common</artifactId>
@@ -62,7 +62,7 @@ If one is new to EMF, one should be advised that EMF uses factories as opposed t
     api 'org.hl7.fhir:fhir.emf:4.0.1'
     api 'org.emfjson:emfjson-jackson:1.3.0'
 
-### The following are not available through Maven Central.  The must be installed from the ecliipse distribution.    
+### The following are not available through Maven Central.  They must be installed from the ecliipse distribution.    
     api 'org.eclipse.emf:org.eclipse.emf.common:2.20.0'
     api 'org.eclipse.emf:org.eclipse.emf.ecore:2.23.0'
     api 'org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.16.0'
