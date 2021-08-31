@@ -1,15 +1,15 @@
 # fhir.emf
 
-## This project is a full implemtation of the FHIR 4.0.1 specification built using EMF (eclipse modeling framework).  
+## A full implemtation of the FHIR 4.0.1 specification built using EMF (eclipse modeling framework).  
 &nbsp;
 
 This project is intended to be used as a data model.  A likely use case might be as the model component of a webservice.  
 &nbsp;
 
-Because this is a full, complete implementation; it supports Structure Definiition and can therefore be used to define a FHIR profile.  However, extensions are by their nature additions to the FHIR specification and will likely require additional code.  
+Because this is a full, complete implementation; it supports Structure Definiition and can therefore be used to define a [FHIR profile](http://hl7.org/fhir/R4/profiling.html#5.1.0).  However, [extensions](http://hl7.org/fhir/R4/profiling.html#api) are by their nature additions to the FHIR specification and will likely require additional code.  
 &nbsp;
 
-Code was generated using the XML schema taken from the FHIR specification.  This schema(s) cam be found in the model directory.
+Code was generated using the [XML schema](http://hl7.org/fhir/R4/xml.html#schema) taken from the FHIR specification.  This schema(s) cam be found in the model directory.
 
     model/fhir-codegen-xsd  
 
