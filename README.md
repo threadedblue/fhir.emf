@@ -4,16 +4,26 @@
 &nbsp;
 
 This project is intended to be used as a data model.  A likely use case might be as the model component of a webservice.  
-&nbsp;
-
-Because this is a full, complete implementation; it supports Structure Definiition and can therefore be used to define a [FHIR profile](http://hl7.org/fhir/R4/profiling.html#5.1.0).  However, [extensions](http://hl7.org/fhir/R4/profiling.html#api) are by their nature additions to the FHIR specification and will likely require additional code.  
-&nbsp;
 
 Code is generated using the [XML schema](http://hl7.org/fhir/R4/xml.html#schema) taken from the FHIR specification.  This schema(s) can be found in the model directory.
 
     model/fhir-codegen-xsd  
 
-fhir.emf accomodates the differences between FHIR's XML and JSON serializations.  Without these accomodations, de/serialization to XML would be conformant but JSON would be non-conformant.
+Because the code is generated, it can be regenerated.  If and when HL7 changes the specification, a new, conformant code base can be had.  
+
+An EMF generated code base offers some benefits over hand written.  
+
+1. The code is fully compliant with the specification.
+2. The API is consistent with no odd little anomalies.
+3. A graph of EMF objects can be de/serialized to/from a variety of formats.  XMI, XML, and JSON are currently supported.  RDF (resource description framework) and AA (associative array) can be implemented by following the same pattern as say XML and can work consistently.  
+4. EMF supports it's own reflection capability similar to Java's but more efficient and easier to use.  
+&nbsp;
+
+Because this is a full, complete implementation; it supports Structure Definiition and can therefore be used to define a [FHIR profile](http://hl7.org/fhir/R4/profiling.html#5.1.0).  However, [extensions](http://hl7.org/fhir/R4/profiling.html#api) are by their nature additions to the FHIR specification and will likely require additional code.  
+&nbsp;
+
+
+fhir.emf accomodates the differences between FHIR's XML and JSON de/serializations.  Without these accomodations, de/serialization to XML would be conformant but JSON would be non-conformant.
 
 Source code is maintained in two locations:  
 
